@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Buddy - HYROX & HIIT Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0A0A0F;
+            --yellow: #FFD166;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--ink);
+            color: var(--white);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            color: var(--yellow);
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--yellow);
+            border-radius: 22px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 0 rgba(255, 209, 102, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 rgba(255, 209, 102, 0.3);
+        }
+
+        .card-hero {
+            background: linear-gradient(135deg, rgba(255, 209, 102, 0.1) 0%, rgba(255, 209, 102, 0.05) 100%);
+            text-align: center;
+            padding: 60px 30px;
+            border-color: var(--yellow);
+        }
+
+        .card-feature {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--yellow);
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 4px 0 rgba(255, 209, 102, 0.2);
+            transition: all 0.2s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 209, 102, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--yellow);
+        }
+
+        .feature-desc {
+            font-size: 1rem;
+            opacity: 0.85;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border: 2px solid var(--yellow);
+            border-radius: 22px;
+            background: var(--yellow);
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 0 rgba(255, 209, 102, 0.5);
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 rgba(255, 209, 102, 0.6);
+            background: #FFE080;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 209, 102, 0.1);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .pricing-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--yellow);
+            border-radius: 22px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 6px 0 rgba(255, 209, 102, 0.25);
+        }
+
+        .pricing-card.premium {
+            background: linear-gradient(135deg, rgba(255, 209, 102, 0.15) 0%, rgba(255, 209, 102, 0.05) 100%);
+            border-width: 3px;
+        }
+
+        .pricing-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+
+        .pricing-list {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .pricing-list li {
+            padding: 12px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing-list li:before {
+            content: "✓ ";
+            color: var(--yellow);
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--yellow);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--yellow);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 2px solid var(--yellow);
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .footer-links a:hover {
+            background: var(--yellow);
+            color: var(--ink);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 2px solid var(--yellow);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-left: 10px;
+            background: var(--yellow);
+            color: var(--ink);
+        }
+
+        .badge-free {
+            background: transparent;
+            color: var(--yellow);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+
+        .highlight-box {
+            background: rgba(255, 209, 102, 0.1);
+            border-left: 4px solid var(--yellow);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--yellow);
+            border-radius: 16px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 20px;
+            }
+
+            .card-hero {
+                padding: 40px 20px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .pricing-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Workout Buddy Logo" class="logo">
+            <h1>Workout Buddy</h1>
+            <p class="subtitle">🐾 HYROX & HIIT Timer with Gamified Pet Evolution</p>
+        </header>
+
+        <div class="card card-hero">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: var(--yellow);">⚡ Level Up Your Training</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; color: rgba(255, 255, 255, 0.9);">
+                A premium, gamified fitness companion designed for HYROX athletes, HIIT enthusiasts, and anyone looking to level up their training. Turn every drop of sweat into progress for your digital companions.
+            </p>
+            <div class="btn-group">
+                <a href="#" class="btn">Download Now</a>
+                <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+        </div>
+
+        <div class="card" id="features">
+            <h2>🚀 Core Functionalities</h2>
+            <div class="card-feature">
+                <div class="feature-item">
+                    <div class="feature-icon">⏱️</div>
+                    <div class="feature-title">The Ultimate Functional Timer</div>
+                    <div class="feature-desc">Specialized timers for HYROX Simulations, HIIT, Tabata, EMOM, and AMRAP. Custom routine builder with audio coaching and smart beep system.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <div class="feature-title">Gamified Evolution</div>
+                    <div class="feature-desc">Earn XP & Coins with every workout. Watch your pets evolve through 6 distinct stages. Unlock rare and legendary pets from the Shop.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Training Intelligence</div>
+                    <div class="feature-desc">Automatically track every session with detailed history. Rate workouts, export/import configurations, and plan your fitness week with a built-in scheduler.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔊</div>
+                    <div class="feature-title">Audio Coaching</div>
+                    <div class="feature-desc">Built-in voice announcements for phase changes and motivational phrases. Full audio support while the app is in the background.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Premium Dark Design</div>
+                    <div class="feature-desc">OLED-optimized interface with high-contrast cards. Large, readable timers and tactile feedback for all major actions.</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">Multi-Language</div>
+                    <div class="feature-desc">Full localization support for English, Italian, and Spanish. More languages coming soon.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 style="text-align: center;">💎 Pricing</h2>
+            <div class="pricing-section">
+                <div class="pricing-card">
+                    <div class="pricing-title">Free <span class="badge badge-free">BASIC</span></div>
+                    <ul class="pricing-list">
+                        <li>Basic timers (HYROX, HIIT, Tabata, EMOM, AMRAP)</li>
+                        <li>Starter pet (Racoon)</li>
+                        <li>Limited workout saves</li>
+                        <li>Basic workout history</li>
+                        <li>Standard audio coaching</li>
+                    </ul>
+                </div>
+                <div class="pricing-card premium">
+                    <div class="pricing-title">Premium <span class="badge">PRO</span></div>
+                    <ul class="pricing-list">
+                        <li>Unlimited custom timers</li>
+                        <li>Double XP/Coin rewards</li>
+                        <li>All collectible pets unlocked</li>
+                        <li>Detailed analytics</li>
+                        <li>Data export/import features</li>
+                        <li>Advanced workout scheduler</li>
+                        <li>Priority support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎮 Pet System</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.1rem; margin-bottom: 15px; color: var(--yellow); font-weight: 600;">🐾 Collect & Evolve Your Digital Companions</p>
+                <p style="margin-bottom: 10px;">Every completed workout rewards you with Experience Points (XP) and Coins. Watch your pets evolve through 6 distinct stages of growth as you hit your fitness goals.</p>
+                <p style="margin-bottom: 10px;"><strong>Available Pets:</strong> Racoon (starter), Rabbit, Penguin, Red Fox, Red Dragon, Phoenix</p>
+                <p style="margin-bottom: 0;"><strong>Daily Rewards:</strong> Your first workouts of the day yield the highest rewards, encouraging consistent training habits.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Evolution Stages</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Collectible Pets</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">XP & Coins</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⏱️ Timer Modes</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🏋️</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">HYROX</h3>
+                    <p style="opacity: 0.8;">Simulation timers for HYROX training</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">⚡</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">HIIT</h3>
+                    <p style="opacity: 0.8;">High-intensity interval training</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🔥</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Tabata</h3>
+                    <p style="opacity: 0.8;">20 seconds on, 10 seconds off</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">⏰</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">EMOM</h3>
+                    <p style="opacity: 0.8;">Every minute on the minute</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">💪</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">AMRAP</h3>
+                    <p style="opacity: 0.8;">As many rounds as possible</p>
+                </div>
+                <div style="text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.03); border: 2px solid var(--yellow); border-radius: 16px;">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Custom</h3>
+                    <p style="opacity: 0.8;">Build your own routines</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 How It Works</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">1️⃣</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Choose Your Timer</h3>
+                    <p style="opacity: 0.8;">Select from HYROX, HIIT, Tabata, EMOM, AMRAP, or create custom routines</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">2️⃣</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Start Training</h3>
+                    <p style="opacity: 0.8;">Follow audio coaching and visual cues during your workout</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">3️⃣</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Earn Rewards</h3>
+                    <p style="opacity: 0.8;">Complete workouts to earn XP and Coins for your pets</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">4️⃣</div>
+                    <h3 style="font-weight: 700; margin-bottom: 10px; color: var(--yellow);">Level Up</h3>
+                    <p style="opacity: 0.8;">Watch your pets evolve and unlock new collectibles in the Shop</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎨 Design Philosophy</h2>
+            <div class="highlight-box">
+                <p style="margin-bottom: 15px;"><strong style="color: var(--yellow);">Premium Dark Aesthetic</strong></p>
+                <p style="margin-bottom: 10px;">Workout Buddy follows a "Premium Dark" design optimized for high visibility during intense training. The OLED-optimized deep backgrounds reduce eye strain and save battery during long sessions.</p>
+                <p style="margin-bottom: 0;"><strong style="color: var(--yellow);">Color Palette:</strong> Ink (#0A0A0F) • Yellow (#FFD166) • White (#FFFFFF)</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="termOfService.html">Terms of Service</a>
+            </div>
+            <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 20px;">
+                © 2025 Workout Buddy. Made with ❤️ for the fitness community.
+            </p>
+            <p style="opacity: 0.6; font-size: 0.85rem; margin-top: 10px;">
+                Salvatore Castellitti • Via Sannio 1, Petrella Tifernina, Molise 86024, Italy
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
