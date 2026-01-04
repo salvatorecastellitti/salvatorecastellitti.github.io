@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rawdoggin Timer - Do Nothing Detox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ink: #0A0A0F;
+            --yellow: #FFD166;
+            --white: #FFFFFF;
+            --gray: rgba(255, 255, 255, 0.7);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--ink);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 209, 102, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--yellow);
+            letter-spacing: -0.02em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--gray);
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .timer-section {
+            background: rgba(255, 209, 102, 0.05);
+            border: 2px solid var(--yellow);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: clamp(4rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--yellow);
+            margin: 30px 0;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.05em;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: 2px solid var(--yellow);
+            background: transparent;
+            color: var(--yellow);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--yellow);
+            color: var(--ink);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 209, 102, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: var(--yellow);
+            color: var(--ink);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 209, 102, 0.8);
+        }
+
+        .timer-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .input-group input {
+            width: 80px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 209, 102, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--yellow);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .features-section {
+            background: rgba(255, 209, 102, 0.05);
+            border: 2px solid var(--yellow);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .features-section h2 {
+            font-size: 2rem;
+            color: var(--yellow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--yellow);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            color: var(--yellow);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .feature-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .challenges-section {
+            margin-top: 40px;
+            background: rgba(255, 209, 102, 0.05);
+            border: 2px solid var(--yellow);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .challenges-section h2 {
+            font-size: 2rem;
+            color: var(--yellow);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 209, 102, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .challenge-card:hover {
+            border-color: var(--yellow);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(255, 209, 102, 0.2);
+        }
+
+        .challenge-card h3 {
+            color: var(--yellow);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .challenge-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .challenge-time {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--yellow);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid var(--yellow);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            color: var(--yellow);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: var(--yellow);
+        }
+
+        .contact-value {
+            font-family: 'Courier New', monospace;
+        }
+
+        .email-link {
+            color: var(--yellow);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .email-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timer-section {
+            animation: fadeInUp 1s ease;
+        }
+
+        .features-section {
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .challenges-section {
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .timer-running {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .timer-display {
+                font-size: 3.5rem;
+            }
+
+            .challenge-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .timer-section,
+            .features-section,
+            .challenges-section {
+                padding: 25px;
+            }
+
+            .timer-display {
+                font-size: 3rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            .input-group input {
+                width: 60px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logoRawdoggin.png" alt="Rawdoggin Timer Logo" class="app-logo">
+            </div>
+            <h1>RAWDOGGIN TIMER</h1>
+            <p class="subtitle">Do Nothing Detox</p>
+        </header>
+
+        <div class="main-content">
+            <div class="timer-section">
+                <h2 style="color: var(--yellow); margin-bottom: 20px; font-size: 1.8rem;">Timer</h2>
+                
+                <div class="timer-input">
+                    <div class="input-group">
+                        <label>Hours</label>
+                        <input type="number" id="hours" min="0" max="23" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Minutes</label>
+                        <input type="number" id="minutes" min="0" max="59" value="5">
+                    </div>
+                    <div class="input-group">
+                        <label>Seconds</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0">
+                    </div>
+                </div>
+
+                <div class="timer-display" id="timerDisplay">00:05:00</div>
+
+                <div class="timer-controls">
+                    <button class="btn btn-primary" id="startBtn">Start</button>
+                    <button class="btn" id="pauseBtn" disabled>Pause</button>
+                    <button class="btn" id="resetBtn">Reset</button>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>Features</h2>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <span class="feature-icon">⏱️</span>
+                        <div class="feature-content">
+                            <h3>Personalized Timers</h3>
+                            <p>Set custom timer durations that fit your schedule. Whether it's 5 minutes or 5 hours, create your perfect "do nothing" session.</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🎯</span>
+                        <div class="feature-content">
+                            <h3>Challenges</h3>
+                            <p>Take on daily challenges to build your rawdoggin streak. Track your progress and push your limits.</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <div class="feature-content">
+                            <h3>Session Tracking</h3>
+                            <p>Monitor your meditation and relaxation sessions. Keep track of your "do nothing" journey over time.</p>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <span class="feature-icon">🔕</span>
+                        <div class="feature-content">
+                            <h3>Distraction-Free</h3>
+                            <p>Focus on doing nothing. Minimal interface designed to help you disconnect and relax completely.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="challenges-section">
+            <h2>Popular Challenges</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card" onclick="setChallenge(0, 5, 0)">
+                    <h3>Quick Detox</h3>
+                    <p>Perfect for beginners</p>
+                    <span class="challenge-time">5:00</span>
+                </div>
+                <div class="challenge-card" onclick="setChallenge(0, 15, 0)">
+                    <h3>Power Session</h3>
+                    <p>Intermediate challenge</p>
+                    <span class="challenge-time">15:00</span>
+                </div>
+                <div class="challenge-card" onclick="setChallenge(0, 30, 0)">
+                    <h3>Deep Focus</h3>
+                    <p>Advanced meditation</p>
+                    <span class="challenge-time">30:00</span>
+                </div>
+                <div class="challenge-card" onclick="setChallenge(1, 0, 0)">
+                    <h3>Hour Challenge</h3>
+                    <p>Ultimate rawdoggin</p>
+                    <span class="challenge-time">1:00:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">Name:</span>
+                    <span class="contact-value">Salvatore Castellitti</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Email:</span>
+                    <a href="mailto:s.castellitti.dev@gmail.com" class="email-link contact-value">s.castellitti.dev@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Address:</span>
+                    <span class="contact-value">Via Sannio 1, Petrella Tifernina, Molise 86024, Italy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let timerInterval = null;
+        let totalSeconds = 0;
+        let isRunning = false;
+        let isPaused = false;
+
+        const hoursInput = document.getElementById('hours');
+        const minutesInput = document.getElementById('minutes');
+        const secondsInput = document.getElementById('seconds');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateDisplay() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            timerDisplay.textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function updateInputs() {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            hoursInput.value = hours;
+            minutesInput.value = minutes;
+            secondsInput.value = seconds;
+        }
+
+        function calculateTotalSeconds() {
+            const hours = parseInt(hoursInput.value) || 0;
+            const minutes = parseInt(minutesInput.value) || 0;
+            const seconds = parseInt(secondsInput.value) || 0;
+            return hours * 3600 + minutes * 60 + seconds;
+        }
+
+        function startTimer() {
+            if (!isRunning && !isPaused) {
+                totalSeconds = calculateTotalSeconds();
+                if (totalSeconds <= 0) {
+                    alert('Please set a timer duration');
+                    return;
+                }
+            }
+
+            isRunning = true;
+            isPaused = false;
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+            hoursInput.disabled = true;
+            minutesInput.disabled = true;
+            secondsInput.disabled = true;
+            timerDisplay.classList.add('timer-running');
+
+            timerInterval = setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    updateDisplay();
+                } else {
+                    stopTimer();
+                    alert('Timer completed! 🎉');
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isRunning = false;
+            isPaused = true;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            timerDisplay.classList.remove('timer-running');
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            stopTimer();
+            totalSeconds = calculateTotalSeconds();
+            updateDisplay();
+            updateInputs();
+        }
+
+        function stopTimer() {
+            isRunning = false;
+            isPaused = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            hoursInput.disabled = false;
+            minutesInput.disabled = false;
+            secondsInput.disabled = false;
+            timerDisplay.classList.remove('timer-running');
+            clearInterval(timerInterval);
+        }
+
+        function setChallenge(hours, minutes, seconds) {
+            if (isRunning) {
+                if (!confirm('Timer is running. Do you want to reset and start a new challenge?')) {
+                    return;
+                }
+            }
+            
+            stopTimer();
+            hoursInput.value = hours;
+            minutesInput.value = minutes;
+            secondsInput.value = seconds;
+            totalSeconds = hours * 3600 + minutes * 60 + seconds;
+            updateDisplay();
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Update display when inputs change
+        [hoursInput, minutesInput, secondsInput].forEach(input => {
+            input.addEventListener('input', () => {
+                if (!isRunning) {
+                    totalSeconds = calculateTotalSeconds();
+                    updateDisplay();
+                }
+            });
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
+
