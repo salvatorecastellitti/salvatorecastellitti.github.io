@@ -92,6 +92,47 @@
             font-size: 1.2em;
         }
 
+        .product-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-text {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .product-tagline {
+            font-style: italic;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .product-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            margin: 10px 0 25px;
+        }
+
         .product-link {
             display: inline-block;
             margin-top: 15px;
@@ -221,10 +262,28 @@
                 Prodotti e Servizi
             </h2>
             <div class="product-info">
-                <p class="product-name">ReplyXpert</p>
-                <p>Una potente estensione Chrome per generare risposte AI per X (Twitter). Automatizza e ottimizza le tue interazioni sui social media con intelligenza artificiale avanzata.</p>
-                <p><strong>Descrizione:</strong> A powerful Chrome extension to generate AI replies for X</p>
-                <a href="https://replyxpert.online" target="_blank" class="product-link">🌐 Visita replyxpert.online</a>
+                <div class="product-section">
+                    <div class="product-image">
+                        <img src="readLocl.png" alt="Reader Lock app icon, an open book with a lock">
+                    </div>
+                    <div class="product-text">
+                        <p class="product-name">Reader Lock – Book Lover Focus</p>
+                        <p class="product-tagline">Blocca le distrazioni, sblocca il piacere di leggere.</p>
+                        <p>Reader Lock aiuta le persone a disconnettersi dal telefono e trasformare il primo sblocco dello schermo in un rituale di lettura. Prima di poter usare il telefono, l'app ti invita a dedicare qualche minuto al tuo libro, creando una routine costante e senza frizioni.</p>
+                        <p>Include anche un diario e un habit tracker integrato: annoti cosa hai letto, come ti sei sentito e tieni traccia delle serie di giorni consecutivi in cui sei riuscito a leggere. Ideale per chi vuole costruire un’abitudine profonda e consapevole, lontano dal doomscrolling.</p>
+                    </div>
+                </div>
+
+                <hr class="product-divider">
+
+                <div class="product-section">
+                    <div class="product-text">
+                        <p class="product-name">ReplyXpert</p>
+                        <p>Una potente estensione Chrome per generare risposte AI per X (Twitter). Automatizza e ottimizza le tue interazioni sui social media con intelligenza artificiale avanzata.</p>
+                        <p><strong>Descrizione:</strong> A powerful Chrome extension to generate AI replies for X.</p>
+                        <a href="https://replyxpert.online" target="_blank" class="product-link">🌐 Visita replyxpert.online</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
