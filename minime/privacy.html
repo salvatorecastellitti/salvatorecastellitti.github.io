@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - MiniMe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text: #ECEDEE;
+            --background: #121212;
+            --tint: #14b8a6;
+            --icon: #9BA1A6;
+            --card: #1E1E1E;
+            --border: #27272a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--background);
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--tint);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--tint);
+            letter-spacing: -0.02em;
+        }
+
+        .last-updated {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--tint);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--tint);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .summary h2 {
+            margin-top: 0;
+        }
+
+        .summary ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .summary li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .summary li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--tint);
+        }
+
+        .toc {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+        }
+
+        .toc ol {
+            list-style: decimal;
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: var(--tint);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .contact-info h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(20, 184, 166, 0.2);
+            color: var(--tint);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        strong {
+            color: var(--tint);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--tint);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .highlight {
+            background: rgba(20, 184, 166, 0.1);
+            padding: 20px;
+            border-left: 4px solid var(--tint);
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 10px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PRIVACY POLICY</h1>
+            <p class="last-updated">Last updated January 25, 2026</p>
+        </header>
+
+        <section>
+            <p>This Privacy Notice for Salvatore Castellitti (doing business as Caste.dev) ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:</p>
+            <ul>
+                <li>Download and use our mobile application <strong>MiniMe</strong>, or any other application of ours that links to this Privacy Notice</li>
+                <li>Engage with us in other related ways, including any sales, marketing, or events</li>
+            </ul>
+            <p>Questions or concerns? Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at s.castellitti.dev@gmail.com.</p>
+        </section>
+
+        <section class="summary">
+            <h2>SUMMARY OF KEY POINTS</h2>
+            <p>This summary provides key points from our Privacy Notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our table of contents below to find the section you are looking for.</p>
+            
+            <ul>
+                <li><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. This includes photos you upload for AI processing and videos you generate.</li>
+                
+                <li><strong>Do we process any sensitive personal information?</strong> We process photos and images you provide for AI enhancement and transformation. These may contain biometric data (facial features). We process this data only to provide the requested AI services and do not store it beyond what is necessary for processing.</li>
+                
+                <li><strong>Do we collect any information from third parties?</strong> We collect information from third-party services such as RevenueCat for subscription and credit management, and we use AI services including Alibaba's video generation models to process your content.</li>
+                
+                <li><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, including AI-powered image enhancement and video generation. We process your information only when we have a valid legal reason to do so.</li>
+                
+                <li><strong>In what situations and with which parties do we share personal information?</strong> We may share information with AI service providers (including Alibaba for video generation) to process your content. Learn more about when and with whom we share your personal information.</li>
+                
+                <li><strong>How do we keep your information safe?</strong> We have adequate organizational and technical processes and procedures in place to protect your personal information. However, no electronic transmission over the internet can be guaranteed to be 100% secure.</li>
+                
+                <li><strong>What are your rights?</strong> Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information.</li>
+                
+                <li><strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by contacting us at s.castellitti.dev@gmail.com.</li>
+            </ul>
+            
+            <p>Want to learn more about what we do with any information we collect? Review the Privacy Notice in full.</p>
+        </section>
+
+        <section class="toc">
+            <h2>TABLE OF CONTENTS</h2>
+            <ol>
+                <li><a href="#section1">WHAT INFORMATION DO WE COLLECT?</a></li>
+                <li><a href="#section2">HOW DO WE PROCESS YOUR INFORMATION?</a></li>
+                <li><a href="#section3">AI SERVICES AND DATA PROCESSING</a></li>
+                <li><a href="#section4">SUBSCRIPTIONS, CREDITS, AND PAYMENTS</a></li>
+                <li><a href="#section5">WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</a></li>
+                <li><a href="#section6">HOW LONG DO WE KEEP YOUR INFORMATION?</a></li>
+                <li><a href="#section7">HOW DO WE KEEP YOUR INFORMATION SAFE?</a></li>
+                <li><a href="#section8">WHAT ARE YOUR PRIVACY RIGHTS?</a></li>
+                <li><a href="#section9">CONTROLS FOR DO-NOT-TRACK FEATURES</a></li>
+                <li><a href="#section10">DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</a></li>
+                <li><a href="#section11">DO OTHER REGIONS HAVE SPECIFIC PRIVACY RIGHTS?</a></li>
+                <li><a href="#section12">DO WE MAKE UPDATES TO THIS NOTICE?</a></li>
+                <li><a href="#section13">HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a></li>
+                <li><a href="#section14">HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</a></li>
+            </ol>
+        </section>
+
+        <section id="section1">
+            <h2>1. WHAT INFORMATION DO WE COLLECT?</h2>
+            <h3>Personal information you disclose to us</h3>
+            <p><strong>In Short:</strong> We collect personal information that you provide to us, including photos and images for AI processing.</p>
+            
+            <p>We collect personal information that you voluntarily provide to us when you use our Services, express an interest in obtaining information about us or our products, or otherwise when you contact us.</p>
+            
+            <div class="highlight">
+                <p><strong>MiniMe Data Collection:</strong> The app collects and processes the following types of data:</p>
+                <ul>
+                    <li><strong>Photos and Images:</strong> Photos you upload for AI enhancement, transformation, and "glow up" effects</li>
+                    <li><strong>Generated Content:</strong> AI-generated images and videos created from your photos</li>
+                    <li><strong>Usage Data:</strong> Information about how you use the app, features accessed, and generation history</li>
+                    <li><strong>Purchase History:</strong> Subscription status and credit purchases for video generation</li>
+                    <li><strong>Device Information:</strong> Device type, operating system, and app version</li>
+                </ul>
+            </div>
+            
+            <p><strong>Biometric Data.</strong> Photos you upload may contain facial features and other biometric data. This data is processed solely for the purpose of providing AI enhancement and transformation services. We do not use this data for identification purposes or share it beyond what is necessary to provide the Services.</p>
+            
+            <p>All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.</p>
+            
+            <h3>Information automatically collected</h3>
+            <p>Some information — such as your Internet Protocol (IP) address and/or browser and device characteristics — is collected automatically when you use our Services.</p>
+            
+            <p>This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, device name, country, location, information about how and when you use our Services, and other technical information. This information is primarily needed to maintain the security and operation of our Services, and for our internal analytics and reporting purposes.</p>
+        </section>
+
+        <section id="section2">
+            <h2>2. HOW DO WE PROCESS YOUR INFORMATION?</h2>
+            <p><strong>In Short:</strong> We process your information to provide AI-powered image enhancement and video generation services, manage your account and purchases, and improve our Services.</p>
+            
+            <p>We process your personal information for a variety of reasons, depending on how you interact with our Services, including:</p>
+            
+            <ul>
+                <li><strong>To provide AI-powered services.</strong> We process your photos using artificial intelligence to provide image enhancement, transformation, and "glow up" effects.</li>
+                
+                <li><strong>To generate videos.</strong> We use Alibaba's video generation models to create videos from your photos when you use credits for video generation.</li>
+                
+                <li><strong>To manage your account and purchases.</strong> We process information related to your subscription status and credit purchases to provide premium features and video generation capabilities.</li>
+                
+                <li><strong>To deliver and facilitate delivery of services to the user.</strong> We may process your information to provide you with the requested service.</li>
+                
+                <li><strong>To respond to user inquiries/offer support to users.</strong> We may process your information to respond to your inquiries and solve any potential issues you might have with the requested service.</li>
+                
+                <li><strong>To send administrative information to you.</strong> We may process your information to send you details about our products and services, changes to our terms and policies, and other similar information.</li>
+                
+                <li><strong>To protect our Services.</strong> We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.</li>
+                
+                <li><strong>To identify usage trends.</strong> We may process information about how you use our Services to better understand how they are being used so we can improve them.</li>
+                
+                <li><strong>To comply with our legal obligations.</strong> We may process your information to comply with our legal obligations, respond to legal requests, and exercise, establish, or defend our legal rights.</li>
+            </ul>
+        </section>
+
+        <section id="section3">
+            <h2>3. AI SERVICES AND DATA PROCESSING</h2>
+            <p><strong>In Short:</strong> We use AI services to process your photos for enhancement and video generation. Your content may be processed by third-party AI providers.</p>
+            
+            <div class="highlight">
+                <p><strong>AI Processing:</strong> MiniMe uses artificial intelligence to enhance and transform your photos. When you use our Services:</p>
+                <ul>
+                    <li>Your photos are sent to AI processing servers to generate enhanced images</li>
+                    <li>For video generation, your photos are processed using Alibaba's video generation models</li>
+                    <li>AI-generated content is created based on your photos and returned to your device</li>
+                    <li>We aim to delete uploaded photos from processing servers after generation is complete</li>
+                </ul>
+            </div>
+            
+            <h3>Third-Party AI Providers</h3>
+            <p>We use third-party AI services to power our features:</p>
+            <ul>
+                <li><strong>Image Enhancement AI:</strong> We use AI models to provide photo enhancement, transformation, and "glow up" effects</li>
+                <li><strong>Alibaba Video Generation:</strong> We use Alibaba's video generation models to create videos from your photos when you use the video generation feature</li>
+            </ul>
+            
+            <p>These third-party AI providers may have their own privacy policies governing the processing of data. We encourage you to review their privacy practices. We take reasonable steps to ensure that our AI service providers maintain appropriate data protection standards.</p>
+            
+            <h3>AI-Generated Content</h3>
+            <p>Content generated by AI (including enhanced images and videos) is based on the photos you provide. You are responsible for the content you upload and should ensure you have the right to use any photos you submit. AI-generated content may not be 100% accurate representations and should not be relied upon for any official or legal purposes.</p>
+        </section>
+
+        <section id="section4">
+            <h2>4. SUBSCRIPTIONS, CREDITS, AND PAYMENTS</h2>
+            <p><strong>In Short:</strong> We offer subscription plans for premium features and a separate credits system for video generation. We reserve the right to modify pricing at any time.</p>
+            
+            <div class="highlight">
+                <p><strong>Pricing and Plans:</strong> We reserve the right to change, modify, or discontinue subscription plans, credit packages, and their respective prices at any time and at our sole discretion, with or without prior notice. Continued use of the Services after any pricing changes constitutes your acceptance of such changes.</p>
+            </div>
+            
+            <h3>Subscription Plans</h3>
+            <p>MiniMe offers subscription plans that provide access to premium features including enhanced AI capabilities and additional image generation options. Subscription payments are processed through the App Store (iOS) or Google Play Store (Android), and are subject to their respective terms and conditions.</p>
+            
+            <h3>Credits for Video Generation</h3>
+            <p>Video generation is a separate feature that requires the purchase of credits. Credits are:</p>
+            <ul>
+                <li><strong>Not included in subscriptions:</strong> Video generation credits are purchased separately from any subscription plan</li>
+                <li><strong>Non-refundable:</strong> Purchased credits cannot be refunded once used</li>
+                <li><strong>Consumable:</strong> Each video generation consumes a certain number of credits</li>
+                <li><strong>Subject to price changes:</strong> The price of credit packages may change at any time</li>
+            </ul>
+            
+            <h3>Payment Processing</h3>
+            <p>Payments for subscriptions and credits are processed through:</p>
+            <ul>
+                <li><strong>RevenueCat:</strong> We use RevenueCat for subscription and purchase management. RevenueCat may collect and process payment information, subscription status, and device identifiers in accordance with their privacy policy.</li>
+                <li><strong>App Store / Google Play:</strong> Actual payment processing is handled by Apple or Google, depending on your device platform.</li>
+            </ul>
+            
+            <p>We do not directly collect or store your payment card information. All payment information is handled by the respective platform providers.</p>
+        </section>
+
+        <section id="section5">
+            <h2>5. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</h2>
+            <p><strong>In Short:</strong> We may share information with AI service providers, payment processors, and in specific situations described below.</p>
+            
+            <p>We may need to share your personal information in the following situations:</p>
+            
+            <ul>
+                <li><strong>AI Service Providers.</strong> We share your photos with AI service providers (including Alibaba for video generation) to process and generate content. These providers process your data solely to provide the AI services and are contractually obligated to maintain confidentiality.</li>
+                
+                <li><strong>Payment Processing.</strong> We share your purchase information with RevenueCat to manage subscriptions and credit purchases. RevenueCat's use of your personal information is governed by their privacy policy.</li>
+                
+                <li><strong>Business Transfers.</strong> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+                
+                <li><strong>Legal Requirements.</strong> We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process.</li>
+                
+                <li><strong>Vital Interests and Legal Rights.</strong> We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved.</li>
+            </ul>
+        </section>
+
+        <section id="section6">
+            <h2>6. HOW LONG DO WE KEEP YOUR INFORMATION?</h2>
+            <p><strong>In Short:</strong> We keep your information for as long as necessary to fulfill the purposes outlined in this Privacy Notice unless otherwise required by law.</p>
+            
+            <p>We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements).</p>
+            
+            <div class="highlight">
+                <p><strong>Data Retention:</strong></p>
+                <ul>
+                    <li><strong>Uploaded Photos:</strong> Photos uploaded for AI processing are typically deleted from our servers shortly after processing is complete</li>
+                    <li><strong>Generated Content:</strong> AI-generated images and videos may be stored temporarily to allow you to download them</li>
+                    <li><strong>Account Data:</strong> Account and subscription information is retained for the duration of your account and as required for legal and business purposes</li>
+                    <li><strong>Local Data:</strong> Data stored locally on your device persists until you delete it or uninstall the app</li>
+                </ul>
+            </div>
+            
+            <p>When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible, then we will securely store your personal information and isolate it from any further processing until deletion is possible.</p>
+        </section>
+
+        <section id="section7">
+            <h2>7. HOW DO WE KEEP YOUR INFORMATION SAFE?</h2>
+            <p><strong>In Short:</strong> We aim to protect your personal information through a system of organizational and technical security measures.</p>
+            
+            <p>We have implemented appropriate and reasonable technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information.</p>
+            
+            <p>Although we will do our best to protect your personal information, transmission of personal information to and from our Services is at your own risk. You should only access the Services within a secure environment.</p>
+            
+            <div class="highlight">
+                <p><strong>Security Measures:</strong></p>
+                <ul>
+                    <li>Encrypted data transmission (HTTPS/TLS)</li>
+                    <li>Secure API connections to AI service providers</li>
+                    <li>Regular security assessments and updates</li>
+                    <li>Limited data retention periods</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="section8">
+            <h2>8. WHAT ARE YOUR PRIVACY RIGHTS?</h2>
+            <p><strong>In Short:</strong> Depending on your state of residence in the US or in some regions, such as the European Economic Area (EEA), United Kingdom (UK), Switzerland, and Canada, you have rights that allow you greater access to and control over your personal information.</p>
+            
+            <p>In some regions (like the EEA, UK, Switzerland, and Canada), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; (iv) if applicable, to data portability; and (v) not to be subject to automated decision-making.</p>
+            
+            <p>We will consider and act upon any request in accordance with applicable data protection laws.</p>
+            
+            <p>If you are located in the EEA or UK and you believe we are unlawfully processing your personal information, you also have the right to complain to your Member State data protection authority or UK data protection authority.</p>
+            
+            <p>If you are located in Switzerland, you may contact the Federal Data Protection and Information Commissioner.</p>
+            
+            <h3>Withdrawing your consent:</h3>
+            <p>If we are relying on your consent to process your personal information, you have the right to withdraw your consent at any time. You can withdraw your consent by contacting us using the contact details provided in the section "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?" below.</p>
+            
+            <p>However, please note that this will not affect the lawfulness of the processing before its withdrawal nor, when applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.</p>
+            
+            <p>If you have questions or comments about your privacy rights, you may email us at s.castellitti.dev@gmail.com.</p>
+        </section>
+
+        <section id="section9">
+            <h2>9. CONTROLS FOR DO-NOT-TRACK FEATURES</h2>
+            <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.</p>
+            
+            <p>California law requires us to let you know how we respond to web browser DNT signals. Because there currently is not an industry or legal standard for recognizing or honoring DNT signals, we do not respond to them at this time.</p>
+        </section>
+
+        <section id="section10">
+            <h2>10. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</h2>
+            <p><strong>In Short:</strong> If you are a resident of California, Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah, or Virginia, you may have the right to request access to and receive details about the personal information we maintain about you and how we have processed it, correct inaccuracies, get a copy of, or delete your personal information.</p>
+            
+            <h3>Categories of Personal Information We Collect</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Examples</th>
+                        <th>Collected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A. Identifiers</td>
+                        <td>Device identifiers, IP address</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>B. Personal information (California Customer Records)</td>
+                        <td>Name, contact information</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>C. Protected classification characteristics</td>
+                        <td>Gender, age, race</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>D. Commercial information</td>
+                        <td>Purchase history, subscription status</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>E. Biometric information</td>
+                        <td>Facial features from uploaded photos</td>
+                        <td>YES (for AI processing only)</td>
+                    </tr>
+                    <tr>
+                        <td>F. Internet or network activity</td>
+                        <td>App usage, features accessed</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>G. Geolocation data</td>
+                        <td>Device location</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>H. Audio, electronic, visual information</td>
+                        <td>Photos uploaded for AI processing</td>
+                        <td>YES</td>
+                    </tr>
+                    <tr>
+                        <td>I. Professional or employment information</td>
+                        <td>Job title, work history</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>J. Education Information</td>
+                        <td>Student records</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>K. Inferences</td>
+                        <td>Preferences, characteristics</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>L. Sensitive personal Information</td>
+                        <td>Biometric data (facial features for AI processing)</td>
+                        <td>YES (for AI processing only)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Your Rights</h3>
+            <p>You have rights under certain US state data protection laws. These rights include:</p>
+            <ul>
+                <li>Right to know whether or not we are processing your personal data</li>
+                <li>Right to access your personal data</li>
+                <li>Right to correct inaccuracies in your personal data</li>
+                <li>Right to request the deletion of your personal data</li>
+                <li>Right to obtain a copy of the personal data you previously shared with us</li>
+                <li>Right to non-discrimination for exercising your rights</li>
+                <li>Right to opt out of the processing of your personal data if it is used for targeted advertising, the sale of personal data, or profiling</li>
+            </ul>
+            
+            <h3>How to Exercise Your Rights</h3>
+            <p>To exercise these rights, you can contact us by emailing us at s.castellitti.dev@gmail.com, or by referring to the contact details at the bottom of this document.</p>
+        </section>
+
+        <section id="section11">
+            <h2>11. DO OTHER REGIONS HAVE SPECIFIC PRIVACY RIGHTS?</h2>
+            <p><strong>In Short:</strong> You may have additional rights based on the country you reside in.</p>
+            
+            <h3>Australia and New Zealand</h3>
+            <p>We collect and process your personal information under the obligations and conditions set by Australia's Privacy Act 1988 and New Zealand's Privacy Act 2020.</p>
+            
+            <p>At any time, you have the right to request access to or correction of your personal information. You can make such a request by contacting us by using the contact details provided in the section "HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?"</p>
+            
+            <p>If you believe we are unlawfully processing your personal information, you have the right to submit a complaint about a breach of the Australian Privacy Principles to the Office of the Australian Information Commissioner and a breach of New Zealand's Privacy Principles to the Office of New Zealand Privacy Commissioner.</p>
+            
+            <h3>Republic of South Africa</h3>
+            <p>At any time, you have the right to request access to or correction of your personal information. You can make such a request by contacting us by using the contact details provided in the section "HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?"</p>
+            
+            <p>If you are unsatisfied with the manner in which we address any complaint with regard to our processing of personal information, you can contact the office of the regulator, the details of which are:</p>
+            
+            <p>
+                The Information Regulator (South Africa)<br>
+                General enquiries: enquiries@inforegulator.org.za<br>
+                Complaints (complete POPIA/PAIA form 5): PAIAComplaints@inforegulator.org.za & POPIAComplaints@inforegulator.org.za
+            </p>
+        </section>
+
+        <section id="section12">
+            <h2>12. DO WE MAKE UPDATES TO THIS NOTICE?</h2>
+            <p><strong>In Short:</strong> Yes, we will update this notice as necessary to stay compliant with relevant laws.</p>
+            
+            <p>We may update this Privacy Notice from time to time. The updated version will be indicated by an updated "Revised" date at the top of this Privacy Notice. If we make material changes to this Privacy Notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this Privacy Notice frequently to be informed of how we are protecting your information.</p>
+        </section>
+
+        <section id="section13" class="contact-info">
+            <h2>13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h2>
+            <p>If you have questions or comments about this notice, you may email us at s.castellitti.dev@gmail.com or contact us by post at:</p>
+            
+            <p>
+                <strong>Salvatore Castellitti</strong><br>
+                Via Sannio 1<br>
+                Petrella Tifernina, Molise 86024<br>
+                Italy
+            </p>
+        </section>
+
+        <section id="section14">
+            <h2>14. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</h2>
+            <p>Based on the applicable laws of your country or state of residence in the US, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information.</p>
+            
+            <div class="highlight">
+                <p><strong>Data Management:</strong> You can manage your data in the following ways:</p>
+                <ul>
+                    <li>Delete generated images and videos from within the app</li>
+                    <li>Manage your subscription through the App Store or Google Play</li>
+                    <li>Request deletion of your account data by contacting us at s.castellitti.dev@gmail.com</li>
+                    <li>Uninstall the app to remove all local data (note: this action cannot be undone)</li>
+                </ul>
+                <p>For subscription-related data managed by RevenueCat or credit purchase history, please contact us directly to manage your data.</p>
+            </div>
+            
+            <p>To request to review, update, or delete your personal information, please contact us at s.castellitti.dev@gmail.com.</p>
+        </section>
+    </div>
+</body>
+</html>

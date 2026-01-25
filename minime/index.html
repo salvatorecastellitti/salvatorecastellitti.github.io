@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMe - Create Your Mini Character</title>
+    <meta name="description" content="Transform yourself into an adorable mini character or figurine with AI. Create unique personalized figures of yourself and loved ones.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text: #ECEDEE;
+            --background: #0f0a1a;
+            --tint: #a855f7;
+            --tint-light: #c084fc;
+            --tint-dark: #7c3aed;
+            --icon: #9BA1A6;
+            --card: #1a1025;
+            --border: #2d1f42;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 60px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .app-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--tint-light) 0%, var(--tint) 50%, var(--tint-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--tint);
+            border-color: var(--tint);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--tint);
+            border-color: var(--tint);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 80px;
+        }
+
+        .hero h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--icon);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--tint) 0%, var(--tint-dark) 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(168, 85, 247, 0.5);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--tint);
+            box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--tint);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--tint);
+            background: rgba(168, 85, 247, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--tint-light);
+        }
+
+        .feature-desc {
+            color: var(--icon);
+            line-height: 1.7;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .showcase {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .showcase-image {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.3);
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--tint);
+        }
+
+        .support {
+            font-size: 0.85rem;
+            color: var(--icon);
+            margin-top: 20px;
+        }
+
+        .support a {
+            color: var(--tint);
+            text-decoration: none;
+        }
+
+        .support a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--tint-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logoMiniMe.png" alt="MiniMe App Logo" class="app-logo">
+                <h1>MiniMe</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="termOfService.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </header>
+
+        <div class="hero">
+            <span class="badge">AI-Powered</span>
+            <h2>Turn Yourself Into a Mini Character</h2>
+            <p>Create adorable mini versions of yourself, friends, and family. Transform any photo into a cute collectible-style figurine with the power of AI.</p>
+            <a href="#" class="cta-button">Download Now</a>
+        </div>
+
+        <div class="card">
+            <h2>What You Can Create</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <div class="feature-title">Mini Figurines</div>
+                    <div class="feature-desc">Generate realistic-looking mini figurines of yourself with cute proportions and expressive features.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Custom Styles</div>
+                    <div class="feature-desc">Choose from various artistic styles - cartoon, anime, 3D render, clay figure, and more.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👗</div>
+                    <div class="feature-title">Outfit Options</div>
+                    <div class="feature-desc">Dress your mini character in different outfits, costumes, and accessories.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎬</div>
+                    <div class="feature-title">Action Poses</div>
+                    <div class="feature-desc">Place your character in fun poses and action scenes for unique creations.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <div class="feature-title">Group Characters</div>
+                    <div class="feature-desc">Create mini versions of your whole family or friend group together.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Share Anywhere</div>
+                    <div class="feature-desc">Export in high quality and share on social media or use as profile pictures.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">1</div>
+                    <div class="feature-title">Upload Your Photo</div>
+                    <div class="feature-desc">Take a selfie or choose a photo from your gallery. Our AI works with any clear face photo.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">2</div>
+                    <div class="feature-title">Choose Your Style</div>
+                    <div class="feature-desc">Select the character style, pose, outfit, and background you want for your mini figure.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">3</div>
+                    <div class="feature-title">Generate & Save</div>
+                    <div class="feature-desc">Watch as AI transforms you into a cute mini character in seconds. Save and share!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Why MiniMe?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-title">Fast Generation</div>
+                    <div class="feature-desc">Get your mini character in just seconds with our optimized AI technology.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-title">High Quality</div>
+                    <div class="feature-desc">Detailed, high-resolution outputs that look amazing on any screen or print.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Private & Secure</div>
+                    <div class="feature-desc">Your photos are processed securely and never shared or stored without permission.</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="termOfService.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="support">
+                Support: <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
