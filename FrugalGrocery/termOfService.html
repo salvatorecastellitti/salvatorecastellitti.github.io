@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FrugalGrocery &mdash; Terms of Service</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #050816;
+        --bg-alt: #0b1020;
+        --fg: #f9fafb;
+        --muted: #9ca3af;
+        --accent: #34d399;
+        --accent-soft: rgba(52, 211, 153, 0.1);
+        --border-subtle: rgba(148, 163, 184, 0.3);
+        --danger: #f97373;
+        --danger-soft: rgba(248, 113, 113, 0.12);
+        --radius-lg: 18px;
+        --radius-pill: 999px;
+        --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.7);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #111827 0, #020617 45%),
+          radial-gradient(circle at bottom right, #0f172a 0, #020617 55%);
+        color: var(--fg);
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        padding: 32px 16px;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: 960px;
+        background: radial-gradient(circle at top left, #020617, #020617 40%),
+          radial-gradient(circle at bottom right, #020617, #020617 40%),
+          linear-gradient(135deg, #020617, #020617);
+        border-radius: 32px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: var(--shadow-soft);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shell::before {
+        content: "";
+        position: absolute;
+        inset: -120px;
+        background:
+          radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.17), transparent 55%),
+          radial-gradient(circle at 100% 0, rgba(59, 130, 246, 0.12), transparent 55%),
+          radial-gradient(circle at 100% 100%, rgba(244, 114, 182, 0.12), transparent 55%);
+        opacity: 0.7;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      .inner {
+        position: relative;
+        z-index: 1;
+        padding: 28px 24px 32px;
+      }
+
+      @media (min-width: 768px) {
+        body {
+          padding: 48px 24px;
+        }
+        .inner {
+          padding: 32px 36px 40px;
+        }
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 45%, #15803d 100%);
+        border: 1px solid rgba(34, 197, 94, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        color: #022c22;
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .brand-name {
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.03em;
+      }
+
+      .brand-tagline {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .chip {
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 6px 12px;
+        font-size: 11px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.18), transparent 65%);
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .chip-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 55%, #166534 100%);
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: minmax(0, 1.85fr);
+        gap: 24px;
+      }
+
+      @media (min-width: 960px) {
+        main {
+          grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        }
+      }
+
+      .hero {
+        margin-bottom: 18px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .eyebrow span {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: rgba(148, 163, 184, 0.9);
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(24px, 3vw, 28px);
+        letter-spacing: 0.02em;
+      }
+
+      .subtitle {
+        margin: 0 0 18px;
+        font-size: 14px;
+        color: var(--muted);
+        max-width: 32rem;
+      }
+
+      .key-pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .key-pill {
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 4px 10px;
+        font-size: 11px;
+        color: var(--muted);
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        background: rgba(15, 23, 42, 0.8);
+      }
+
+      .key-pill strong {
+        color: var(--fg);
+        font-weight: 500;
+      }
+
+      .updated {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .updated span {
+        color: var(--fg);
+      }
+
+      .disclaimer {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px dashed rgba(148, 163, 184, 0.6);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      section {
+        margin-bottom: 18px;
+        padding: 14px 14px 16px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), #020617);
+        border: 1px solid rgba(148, 163, 184, 0.45);
+      }
+
+      section h2 {
+        margin: 0 0 6px;
+        font-size: 15px;
+      }
+
+      section p,
+      section li {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      section p {
+        margin: 6px 0;
+      }
+
+      ul {
+        margin: 6px 0 4px 1.1rem;
+        padding: 0;
+      }
+
+      li + li {
+        margin-top: 4px;
+      }
+
+      .section-tag {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: rgba(148, 163, 184, 0.9);
+        margin-bottom: 2px;
+      }
+
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      .badge {
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--muted);
+      }
+
+      .badge.badge-danger {
+        border-color: rgba(239, 68, 68, 0.8);
+        background: var(--danger-soft);
+        color: #fecaca;
+      }
+
+      .badge.badge-success {
+        border-color: rgba(52, 211, 153, 0.8);
+        background: var(--accent-soft);
+        color: #bbf7d0;
+      }
+
+      .side-panel {
+        display: none;
+      }
+
+      @media (min-width: 960px) {
+        .side-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+      }
+
+      .side-card {
+        padding: 14px 14px 16px;
+        border-radius: 18px;
+        background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.1), transparent 60%),
+          radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.1), transparent 60%),
+          linear-gradient(145deg, #020617, #020617);
+        border: 1px solid rgba(148, 163, 184, 0.6);
+      }
+
+      .side-card h3 {
+        margin: 0 0 4px;
+        font-size: 13px;
+      }
+
+      .side-card p {
+        margin: 4px 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      .pill {
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.85);
+        color: var(--muted);
+      }
+
+      .footnote {
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      a {
+        color: #4ade80;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="inner">
+        <header class="top-bar">
+          <div class="brand">
+            <div class="brand-avatar">F</div>
+            <div class="brand-text">
+              <div class="brand-name">FrugalGrocery</div>
+              <div class="brand-tagline">Smart lists. Smarter grocery savings.</div>
+            </div>
+          </div>
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span>Terms of Service</span>
+          </div>
+        </header>
+
+        <main>
+          <div>
+            <div class="hero">
+              <div class="eyebrow">
+                <span>Legal</span>
+                Using the FrugalGrocery mobile application
+              </div>
+              <h1>Terms of Service</h1>
+              <p class="subtitle">
+                These Terms of Service (&quot;Terms&quot;) explain how you may use the
+                FrugalGrocery app to create and manage shopping lists based on prices
+                you capture from different stores. Please read them carefully before
+                using the app.
+              </p>
+              <div class="key-pill-row">
+                <div class="key-pill">
+                  <strong>No account</strong> &mdash; app works without sign‑up.
+                </div>
+                <div class="key-pill">
+                  <strong>AI processing</strong> &mdash; receipts &amp; price tags only.
+                </div>
+                <div class="key-pill">
+                  <strong>No refunds</strong> on subscription fees.
+                </div>
+              </div>
+              <div class="updated">
+                Last updated: <span>January 28, 2026</span>
+              </div>
+              <div class="disclaimer">
+                This document is a product description for your app and is not legal
+                advice. You should ask a qualified lawyer to review and adapt these
+                Terms so they fit your specific business, payment provider, and local
+                laws.
+              </div>
+            </div>
+
+            <section id="acceptance">
+              <div class="section-tag">1. Acceptance of Terms</div>
+              <h2>By using FrugalGrocery</h2>
+              <p>
+                By downloading, installing, accessing, or using the FrugalGrocery
+                application (&quot;App&quot;), you agree to be bound by these Terms.
+                If you do not agree, you must not use the App.
+              </p>
+              <p>
+                You represent that you are legally able to enter into these Terms under
+                the laws of your jurisdiction.
+              </p>
+            </section>
+
+            <section id="service-description">
+              <div class="section-tag">2. What FrugalGrocery does</div>
+              <h2>Service description</h2>
+              <p>
+                FrugalGrocery helps you build and compare grocery shopping lists based
+                on prices you provide from different stores. You can add product and
+                price information in three ways:
+              </p>
+              <ul>
+                <li>
+                  <strong>Receipt upload or scan</strong>: you may upload or scan a
+                  receipt, and an AI system extracts product names and prices, which
+                  are then associated with a store you select or create.
+                </li>
+                <li>
+                  <strong>Price tag upload or scan</strong>: you may upload or scan
+                  images of price tags, and an AI system extracts the product and
+                  price, which are then associated with a store you select or create.
+                </li>
+                <li>
+                  <strong>Manual entry</strong>: you can manually type in product
+                  names, quantities, and prices for the stores you choose.
+                </li>
+              </ul>
+              <p>
+                The App organizes this information so you can create, compare, and
+                optimize grocery lists based on your own data.
+              </p>
+            </section>
+
+            <section id="accounts">
+              <div class="section-tag">3. Accounts &amp; access</div>
+              <h2>No account creation</h2>
+              <p>
+                FrugalGrocery does not require or provide user account creation or
+                login. Access to the App is tied to your device and your valid
+                subscription (if any) through the relevant app store or payment
+                provider.
+              </p>
+              <p>
+                You are responsible for maintaining the security of your device and for
+                any activity within the App on that device.
+              </p>
+            </section>
+
+            <section id="subscription">
+              <div class="section-tag">4. Subscription &amp; payments</div>
+              <h2>Subscription model</h2>
+              <p>
+                FrugalGrocery may offer a subscription that unlocks or extends
+                functionality, such as unlimited or expanded use of AI features or
+                other premium capabilities (&quot;Subscription&quot;).
+              </p>
+              <p>
+                Subscription details (price, billing period, and included features) are
+                presented to you in the app store or payment interface at the time of
+                purchase. By starting a Subscription, you authorize the app store or
+                payment provider to charge you the applicable recurring fees, taxes,
+                and any other charges, according to their terms.
+              </p>
+              <p>
+                You can manage or cancel your Subscription through the platform where
+                you purchased it (for example, your Apple App Store or Google Play
+                account). Cancellation will take effect at the end of the then-current
+                billing period.
+              </p>
+              <div class="badge-row">
+                <span class="badge badge-danger">No refunds</span>
+              </div>
+              <p>
+                <strong>No refunds.</strong> All Subscription fees are final and
+                non‑refundable, including for partially used periods. Where allowed by
+                the applicable platform, you may stop future renewals by cancelling
+                before the next billing period, but you will not receive a refund for
+                payments already made.
+              </p>
+            </section>
+
+            <section id="use-of-ai">
+              <div class="section-tag">5. AI processing of images</div>
+              <h2>How your images are used</h2>
+              <p>
+                When you upload or scan receipts or price tags, the App uses AI
+                services to extract the minimum information needed for the App to work,
+                such as product names, quantities, store names, and prices.
+              </p>
+              <ul>
+                <li>
+                  Only the information required to create and maintain your price and
+                  product data is extracted from the images.
+                </li>
+                <li>
+                  The images are processed for this purpose only and are not used to
+                  build user profiles or for targeted advertising.
+                </li>
+                <li>
+                  We do not use the images to intentionally extract sensitive personal
+                  information about you (such as names, addresses, payment card
+                  numbers, or loyalty IDs), and you should avoid uploading images that
+                  visibly contain such data whenever possible.
+                </li>
+              </ul>
+              <p>
+                AI services may be provided by third‑party providers, and your images
+                may pass through their systems solely to perform this extraction. Those
+                providers process data under their own terms and privacy practices.
+              </p>
+            </section>
+
+            <section id="data">
+              <div class="section-tag">6. Data &amp; privacy</div>
+              <h2>What we store (and what we do not)</h2>
+              <p>
+                FrugalGrocery is designed to operate with minimal personal data. In
+                particular:
+              </p>
+              <ul>
+                <li>
+                  <strong>No user accounts.</strong> We do not create or manage user
+                  profiles or login credentials.
+                </li>
+                <li>
+                  <strong>No direct personal identifiers.</strong> We do not
+                  intentionally store information such as your name, email address, or
+                  physical address as part of the core App experience.
+                </li>
+                <li>
+                  <strong>Price and product data.</strong> The main information stored
+                  by the App is the product and price data (and related store names)
+                  that you provide via images or manual entry so the App can build and
+                  maintain your shopping lists.
+                </li>
+              </ul>
+              <p>
+                Depending on your device, operating system, or app store, some
+                technical data (such as crash logs or analytics) may be processed by
+                those platforms to keep the App running reliably. Such processing is
+                governed by the respective platform&apos;s terms and privacy policies.
+              </p>
+            </section>
+
+            <section id="user-responsibilities">
+              <div class="section-tag">7. Your responsibilities</div>
+              <h2>Acceptable use</h2>
+              <p>
+                You agree to use the App only for lawful purposes and in accordance
+                with these Terms. You must not:
+              </p>
+              <ul>
+                <li>
+                  use the App in any way that violates applicable laws or regulations;
+                </li>
+                <li>
+                  attempt to copy, modify, reverse engineer, decompile, or otherwise
+                  access the App&apos;s source code, except where allowed by law;
+                </li>
+                <li>
+                  upload, share, or process images or content that is illegal, harmful,
+                  abusive, or infringes the rights of others;
+                </li>
+                <li>
+                  interfere with or disrupt the App&apos;s operation, servers, or
+                  networks;
+                </li>
+                <li>
+                  use the App to build or train a competing product or service without
+                  our express written permission.
+                </li>
+              </ul>
+              <p>
+                You are responsible for the accuracy and completeness of the prices and
+                product information you provide, and for reviewing any AI‑generated
+                results before relying on them.
+              </p>
+            </section>
+
+            <section id="license">
+              <div class="section-tag">8. License &amp; intellectual property</div>
+              <h2>Limited license to use the App</h2>
+              <p>
+                Subject to your compliance with these Terms and any applicable payment
+                obligations, we grant you a limited, non‑exclusive, non‑transferable,
+                revocable license to install and use the App on a device that you own
+                or control, solely for your personal, non‑commercial use.
+              </p>
+              <p>
+                We and our licensors retain all rights, title, and interest in and to
+                the App, including all software, user interfaces, designs, graphics,
+                trademarks, and content, except for the data you provide.
+              </p>
+              <p>
+                You retain any rights you may have to the content you submit (such as
+                product and price data), but you grant us a limited license to store,
+                process, and use that content solely to operate and improve the App.
+              </p>
+            </section>
+
+            <section id="ai-disclaimer">
+              <div class="section-tag">9. AI limitations</div>
+              <h2>Accuracy &amp; reliability</h2>
+              <p>
+                The App relies on automated systems, including AI, to read information
+                from receipts and price tags and to help you compare and organize your
+                grocery data. These systems may occasionally make mistakes or produce
+                incomplete or outdated results.
+              </p>
+              <p>
+                You should always double‑check important information (such as prices,
+                quantities, and store names) before making purchasing decisions. The
+                App is intended as a convenience and support tool only and should not
+                be treated as a substitute for your own judgment.
+              </p>
+            </section>
+
+            <section id="third-parties">
+              <div class="section-tag">10. Third‑party services</div>
+              <h2>App stores, payments &amp; AI providers</h2>
+              <p>
+                The App may rely on third‑party services, including app stores, payment
+                processors, analytics providers, and AI service providers. Your use of
+                those services may be subject to their own terms and privacy policies,
+                which you should review.
+              </p>
+              <p>
+                We are not responsible for the acts or omissions of such third parties.
+              </p>
+            </section>
+
+            <section id="termination">
+              <div class="section-tag">11. Suspension &amp; termination</div>
+              <h2>When we may restrict access</h2>
+              <p>
+                We may suspend or terminate your access to the App (in whole or in
+                part) if we reasonably believe that:
+              </p>
+              <ul>
+                <li>you have seriously or repeatedly violated these Terms; or</li>
+                <li>
+                  your use of the App could cause harm, legal liability, or disruption
+                  to the App, other users, or third parties.
+                </li>
+              </ul>
+              <p>
+                Where reasonably possible, we will try to give you notice before
+                taking such action. Termination will not give rise to any refund
+                obligation for amounts already paid, except as required by law or by
+                the applicable app store&apos;s policies.
+              </p>
+            </section>
+
+            <section id="disclaimers">
+              <div class="section-tag">12. Disclaimers</div>
+              <h2>No warranty</h2>
+              <p>
+                The App is provided on an &quot;as is&quot; and &quot;as available&quot;
+                basis, without warranties of any kind, whether express or implied,
+                including any warranties of merchantability, fitness for a particular
+                purpose, or non‑infringement.
+              </p>
+              <p>
+                We do not guarantee that the App will be uninterrupted, error‑free, or
+                free from security vulnerabilities, or that price or product data will
+                always be accurate, complete, or up to date.
+              </p>
+            </section>
+
+            <section id="liability">
+              <div class="section-tag">13. Limitation of liability</div>
+              <h2>Limits on what we&apos;re responsible for</h2>
+              <p>
+                To the maximum extent permitted by law, we will not be liable for any
+                indirect, incidental, special, consequential, or punitive damages, or
+                for any loss of savings, data, or profits, arising out of or in
+                connection with your use of the App.
+              </p>
+              <p>
+                To the extent our liability cannot be excluded, our total aggregate
+                liability arising out of or relating to the App or these Terms will be
+                limited to the amount you paid for the Subscription during the
+                twelve&nbsp;(12) months immediately preceding the event giving rise to
+                the claim, or, if you have no Subscription, to the extent allowed by
+                law.
+              </p>
+            </section>
+
+            <section id="changes">
+              <div class="section-tag">14. Changes to the App or these Terms</div>
+              <h2>Updates</h2>
+              <p>
+                We may update the App from time to time to add or remove features,
+                improve performance, or address technical or legal issues. We may also
+                update these Terms to reflect such changes or for other operational,
+                legal, or regulatory reasons.
+              </p>
+              <p>
+                When we make material changes to these Terms, we will seek to provide
+                notice within the App or through other appropriate means. Your
+                continued use of the App after the updated Terms become effective
+                constitutes your acceptance of them.
+              </p>
+            </section>
+
+            <section id="law">
+              <div class="section-tag">15. Governing law</div>
+              <h2>Which laws apply</h2>
+              <p>
+                These Terms and your use of the App are governed by the laws of the
+                jurisdiction where you reside, without regard to its conflict‑of‑laws
+                rules, unless another law is required to apply by the rules of your
+                country or region.
+              </p>
+              <p>
+                Where required by law, you may have rights to bring disputes in the
+                courts of your place of residence. Otherwise, any disputes will be
+                resolved in the competent courts of the place where we are established.
+              </p>
+            </section>
+
+            <section id="contact">
+              <div class="section-tag">16. Contact</div>
+              <h2>How to reach us</h2>
+              <p>
+                If you have questions about these Terms or about FrugalGrocery, you can
+                contact us at
+                <strong>[insert your support email or website contact form URL]</strong>.
+              </p>
+            </section>
+          </div>
+
+          <aside class="side-panel" aria-label="Summary">
+            <div class="side-card">
+              <h3>At a glance</h3>
+              <p>
+                FrugalGrocery helps you save on groceries by letting you track prices
+                from different stores using your own receipts, price tags, and manual
+                input.
+              </p>
+              <div class="pill-list">
+                <span class="pill">No account required</span>
+                <span class="pill">AI‑powered extraction</span>
+                <span class="pill">Price &amp; product focused</span>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <h3>Key business rules</h3>
+              <p>
+                These highlights are for convenience only. The full Terms above
+                control.
+              </p>
+              <ul>
+                <li>Subscription unlocks unlimited or premium features.</li>
+                <li>Subscription fees are non‑refundable.</li>
+                <li>No user accounts and minimal personal data.</li>
+                <li>Images are processed only to extract product and price data.</li>
+              </ul>
+              <div class="pill-list">
+                <span class="pill">Non‑refundable payments</span>
+                <span class="pill">Local‑first experience</span>
+                <span class="pill">Minimal data retention</span>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <h3>Legal safety checks</h3>
+              <p>
+                Before publishing, you should confirm with legal counsel that the
+                &quot;no refund&quot; policy, subscription rules, and data‑handling
+                description comply with the laws where your users are located and with
+                your payment provider&apos;s requirements.
+              </p>
+              <p class="footnote">
+                You may need additional terms if you collect more data or add new
+                features (for example, user accounts, social sharing, or web access).
+              </p>
+            </div>
+          </aside>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
+
