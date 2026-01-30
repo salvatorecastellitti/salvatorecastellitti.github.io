@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FrugalGrocery &mdash; Build Smarter Grocery Lists</title>
+    <title>Frugal Grocery: Where's cheap? — Track prices, save on groceries</title>
     <meta
       name="description"
-      content="FrugalGrocery helps you build smarter shopping lists by comparing prices across stores using your receipts, price tags, and manual entries."
+      content="Track grocery prices, scan receipts and price tags, and always know where to shop for the best deals. Build smart shopping lists and save more."
     />
     <link rel="icon" type="image/png" href="./icon.png" />
     <style>
@@ -20,48 +20,63 @@
         --border: #e5e7eb;
         --success: #22c55e;
         --success-light: #dcfce7;
-        --error: #ef4444;
-        --error-light: #fee2e2;
-        --shadow-soft: 0 22px 50px rgba(15, 23, 42, 0.16);
+        --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
         --radius-xl: 24px;
         --radius-lg: 18px;
+        --radius-md: 14px;
         --radius-pill: 999px;
+        --safe-top: env(safe-area-inset-top, 0);
+        --safe-bottom: env(safe-area-inset-bottom, 0);
       }
 
       * {
         box-sizing: border-box;
       }
 
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
-          'Segoe UI', sans-serif;
-        background: radial-gradient(circle at top left, #e0f2fe 0, #f4f6f5 50%),
-          radial-gradient(circle at bottom right, #dcfce7 0, #f4f6f5 55%);
-        color: var(--text);
-        -webkit-font-smoothing: antialiased;
+      html {
+        -webkit-tap-highlight-color: transparent;
       }
 
       body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
       }
 
-      .page-shell {
-        max-width: 1120px;
+      .page {
+        width: 100%;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 20px 16px 40px;
+        padding: 16px 20px 32px;
+        padding-top: calc(12px + var(--safe-top));
+        padding-bottom: calc(32px + var(--safe-bottom));
       }
 
-      header {
+      @media (min-width: 640px) {
+        .page {
+          padding: 24px 28px 48px;
+        }
+      }
+
+      /* ----- Header (mobile-first) ----- */
+      .header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 32px;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      @media (min-width: 640px) {
+        .header {
+          margin-bottom: 40px;
+        }
       }
 
       .brand {
@@ -70,803 +85,760 @@
         gap: 10px;
       }
 
-      .brand-logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
         background: var(--white);
         border: 1px solid #d1fae5;
-        display: inline-flex;
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+        overflow: hidden;
+        display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 12px 25px rgba(16, 185, 129, 0.35);
-        overflow: hidden;
       }
 
-      .brand-logo img {
+      .brand-icon img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-      }
-
-      .brand-text {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
       }
 
       .brand-name {
         font-weight: 700;
-        font-size: 18px;
-        letter-spacing: 0.03em;
+        font-size: 17px;
+        letter-spacing: 0.02em;
       }
 
-      .brand-tagline {
-        font-size: 12px;
+      .brand-tag {
+        font-size: 11px;
         color: var(--text-secondary);
+        margin-top: 1px;
       }
 
-      nav {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 13px;
-      }
-
-      nav a {
-        color: var(--text-secondary);
-        text-decoration: none;
-      }
-
-      nav a:hover {
-        color: var(--text);
-      }
-
-      .nav-cta {
-        padding: 7px 14px;
-        border-radius: var(--radius-pill);
-        border: 1px solid rgba(16, 185, 129, 0.25);
-        background: linear-gradient(135deg, #bbf7d0, #22c55e);
-        color: #064e3b;
-        font-weight: 600;
-        box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
-      }
-
-      .nav-cta:hover {
-        filter: brightness(0.98);
-      }
-
-      main {
-        display: grid;
-        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-        gap: 40px;
-        align-items: center;
-      }
-
-      @media (max-width: 900px) {
-        main {
-          grid-template-columns: minmax(0, 1fr);
-          gap: 32px;
-        }
-        header {
-          flex-direction: row;
-        }
-        nav {
-          display: none;
-        }
-      }
-
-      .hero-eyebrow {
+      .header-cta {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 5px 11px;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 16px;
         border-radius: var(--radius-pill);
-        background: rgba(209, 250, 229, 0.85);
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        color: #047857;
-        font-size: 11px;
-        margin-bottom: 12px;
+        background: #111827;
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 14px rgba(17, 24, 39, 0.35);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
 
-      .hero-eyebrow-badge {
-        width: 9px;
-        height: 9px;
-        border-radius: 999px;
-        background: radial-gradient(circle at 30% 20%, #bbf7d0, #22c55e 60%, #15803d);
-        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+      .header-cta:active {
+        transform: scale(0.98);
       }
 
-      h1 {
-        margin: 0 0 10px;
-        font-size: clamp(30px, 4vw, 40px);
-        letter-spacing: 0.01em;
+      @media (min-width: 640px) {
+        .header-cta:hover {
+          box-shadow: 0 6px 20px rgba(17, 24, 39, 0.4);
+        }
       }
 
-      h1 span {
-        color: #047857;
+      .header-cta svg {
+        width: 18px;
+        height: 18px;
       }
 
-      .hero-subtitle {
-        margin: 0 0 18px;
-        font-size: 15px;
-        color: var(--text-secondary);
-        max-width: 32rem;
+      /* ----- Hero (mobile-first: stacked, curiosity + CTA) ----- */
+      .hero {
+        text-align: center;
+        margin-bottom: 36px;
       }
 
-      .hero-highlights {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 22px;
+      @media (min-width: 900px) {
+        .hero-wrap {
+          display: grid;
+          grid-template-columns: 1fr minmax(280px, 0.9fr);
+          gap: 48px;
+          align-items: center;
+          text-align: left;
+        }
+        .hero {
+          margin-bottom: 0;
+        }
       }
 
-      .hero-pill {
+      .hero-badge {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 5px 11px;
+        padding: 6px 12px;
         border-radius: var(--radius-pill);
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.85);
+        background: var(--success-light);
+        border: 1px solid #bbf7d0;
+        color: #166534;
         font-size: 12px;
-        color: var(--text-secondary);
+        font-weight: 500;
+        margin-bottom: 16px;
       }
 
-      .hero-pill strong {
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+      }
+
+      .hero-hook {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.35;
         color: var(--text);
+        margin: 0 0 8px;
+        max-width: 22em;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .hero-actions {
+      @media (min-width: 900px) {
+        .hero-hook {
+          margin-left: 0;
+          margin-right: 0;
+          font-size: 20px;
+        }
+      }
+
+      .hero-hook em {
+        font-style: normal;
+        color: var(--primary);
+      }
+
+      .hero-title {
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin: 0 0 12px;
+      }
+
+      @media (min-width: 640px) {
+        .hero-title {
+          font-size: 34px;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .hero-title {
+          font-size: 38px;
+        }
+      }
+
+      .hero-title span {
+        color: var(--primary);
+      }
+
+      .hero-desc {
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--text-secondary);
+        margin: 0 0 20px;
+        max-width: 26em;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @media (min-width: 900px) {
+        .hero-desc {
+          margin-left: 0;
+          margin-right: 0;
+          font-size: 16px;
+          margin-bottom: 24px;
+        }
+      }
+
+      .hero-cta {
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 18px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
       }
 
-      .btn-primary {
-        border: none;
-        cursor: pointer;
+      @media (min-width: 900px) {
+        .hero-cta {
+          align-items: flex-start;
+        }
+      }
+
+      .app-store-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 11px 18px;
-        border-radius: var(--radius-pill);
-        background: linear-gradient(135deg, #10b981, #22c55e);
-        color: #ecfdf5;
-        font-size: 14px;
+        padding: 12px 22px;
+        border-radius: 12px;
+        background: #111827;
+        color: var(--white);
+        font-size: 15px;
         font-weight: 600;
-        box-shadow: 0 16px 40px rgba(16, 185, 129, 0.4);
+        text-decoration: none;
+        box-shadow: 0 8px 28px rgba(17, 24, 39, 0.4);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
 
-      .btn-primary span.chevron {
-        font-size: 16px;
+      .app-store-btn:active {
+        transform: scale(0.98);
       }
 
-      .btn-ghost {
-        border-radius: var(--radius-pill);
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.85);
-        padding: 9px 14px;
-        font-size: 13px;
-        color: var(--text-secondary);
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+      @media (min-width: 640px) {
+        .app-store-btn:hover {
+          box-shadow: 0 12px 36px rgba(17, 24, 39, 0.45);
+        }
       }
 
-      .btn-ghost-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: #22c55e;
+      .app-store-btn svg {
+        width: 22px;
+        height: 22px;
       }
 
-      .hero-footnote {
-        font-size: 11px;
+      .hero-meta {
+        font-size: 12px;
         color: var(--text-secondary);
       }
 
-      .hero-footnote strong {
+      .hero-meta strong {
         color: var(--text);
       }
 
+      /* ----- Phone mock (mobile: below hero) ----- */
       .hero-visual {
-        position: relative;
-        padding: 12px;
+        display: flex;
+        justify-content: center;
+        padding: 16px 0;
       }
 
-      .phone-frame {
-        position: relative;
-        width: min(320px, 100%);
-        margin: 0 auto;
-        border-radius: 34px;
+      @media (min-width: 900px) {
+        .hero-visual {
+          padding: 0;
+          justify-content: flex-end;
+        }
+      }
+
+      .phone {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 36px;
         padding: 10px;
-        background: radial-gradient(circle at top, #e5f9f0 0, #f9fafb 40%, #e5e7eb 100%);
-        box-shadow: var(--shadow-soft);
-        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: linear-gradient(165deg, #e5e7eb 0%, #f3f4f6 50%);
+        box-shadow:
+          0 25px 50px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(0, 0, 0, 0.06);
       }
 
-      .phone-inner {
-        border-radius: 26px;
-        background: #f9fafb;
+      @media (min-width: 640px) {
+        .phone {
+          max-width: 300px;
+        }
+      }
+
+      .phone-screen {
+        border-radius: 28px;
         overflow: hidden;
-        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        border: 1px solid var(--border);
       }
 
-      .phone-header {
+      .phone-status {
+        padding: 10px 14px 8px;
+        background: #ecfdf5;
+        border-bottom: 1px solid #d1fae5;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 12px;
-        background: #ecfdf5;
-        border-bottom: 1px solid #d1fae5;
       }
 
-      .phone-header-left {
+      .phone-app {
         display: flex;
         align-items: center;
         gap: 8px;
       }
 
-      .phone-logo {
-        width: 22px;
-        height: 22px;
-        border-radius: 8px;
+      .phone-app-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        overflow: hidden;
         background: var(--white);
         border: 1px solid #d1fae5;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
       }
 
-      .phone-logo img {
+      .phone-app-icon img {
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
 
-      .phone-title {
-        font-size: 12px;
+      .phone-app-name {
+        font-size: 13px;
         font-weight: 600;
       }
 
-      .phone-tag {
+      .phone-app-sub {
         font-size: 11px;
-        color: #047857;
+        color: var(--primary);
       }
 
-      .phone-chip {
+      .phone-badge {
         font-size: 10px;
-        padding: 3px 8px;
-        border-radius: 999px;
-        background: rgba(16, 185, 129, 0.1);
+        padding: 4px 8px;
+        border-radius: var(--radius-pill);
+        background: rgba(16, 185, 129, 0.15);
         color: #047857;
-        border: 1px solid rgba(16, 185, 129, 0.25);
+        font-weight: 600;
       }
 
       .phone-tabs {
         display: flex;
-        padding: 8px 10px 2px;
-        gap: 4px;
+        padding: 8px 10px 4px;
+        gap: 6px;
       }
 
       .phone-tab {
         flex: 1;
         text-align: center;
-        font-size: 10px;
-        padding: 5px 0;
-        border-radius: 999px;
+        padding: 8px 4px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: 500;
         color: var(--placeholder);
       }
 
-      .phone-tab.active {
-        background: #10b981;
-        color: #ecfdf5;
+      .phone-tab.on {
+        background: var(--primary);
+        color: var(--white);
       }
 
       .phone-body {
-        padding: 8px 10px 10px;
+        padding: 12px 14px 16px;
       }
 
-      .phone-section-title {
+      .phone-label {
         font-size: 11px;
         font-weight: 600;
-        margin-bottom: 6px;
-        color: #111827;
-      }
-
-      .phone-features {
-        display: grid;
-        gap: 6px;
-        margin-bottom: 10px;
-      }
-
-      .phone-feature-card {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 7px;
-        border-radius: 12px;
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-      }
-
-      .phone-feature-icon {
-        width: 22px;
-        height: 22px;
-        border-radius: 999px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        background: #ecfdf5;
-        color: #047857;
-      }
-
-      .phone-feature-text {
-        font-size: 11px;
-      }
-
-      .phone-feature-text span {
-        display: block;
-        color: var(--text-secondary);
-        font-size: 10px;
-      }
-
-      .phone-list-card {
-        margin-top: 4px;
-        border-radius: 14px;
-        background: #ecfdf5;
-        border: 1px solid #bbf7d0;
-        padding: 8px;
-      }
-
-      .phone-list-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 11px;
-        margin-bottom: 6px;
-      }
-
-      .phone-list-header span {
-        font-weight: 600;
-      }
-
-      .phone-list-header small {
-        color: #047857;
-      }
-
-      .phone-items {
-        display: grid;
-        gap: 4px;
-        font-size: 10px;
-      }
-
-      .phone-item-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-      }
-
-      .phone-item-row span {
-        color: #065f46;
-      }
-
-      .phone-item-row small {
-        color: #6b7280;
-      }
-
-      .phone-savings {
-        margin-top: 6px;
-        font-size: 10px;
-        color: #047857;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-
-      .phone-savings-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 999px;
-        background: #22c55e;
-      }
-
-      .phone-floating-tag {
-        position: absolute;
-        right: 6%;
-        top: 6%;
-        padding: 6px 10px;
-        border-radius: var(--radius-pill);
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        font-size: 11px;
-        color: var(--text-secondary);
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-      }
-
-      .phone-floating-tag strong {
-        color: #047857;
-      }
-
-      .phone-floating-badge {
-        position: absolute;
-        left: 2%;
-        bottom: 6%;
-        padding: 5px 9px;
-        border-radius: var(--radius-pill);
-        background: var(--success-light);
-        border: 1px solid #bbf7d0;
-        font-size: 10px;
-        color: #166534;
-        box-shadow: 0 16px 35px rgba(16, 185, 129, 0.35);
-      }
-
-      .section {
-        margin-top: 40px;
-      }
-
-      .section-header {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 18px;
-      }
-
-      .section-title {
-        font-size: 18px;
-        font-weight: 600;
-      }
-
-      .section-subtitle {
-        font-size: 13px;
-        color: var(--text-secondary);
-        max-width: 30rem;
-      }
-
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      @media (max-width: 900px) {
-        .feature-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (max-width: 640px) {
-        .feature-grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
-
-      .feature-card {
-        border-radius: var(--radius-lg);
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid var(--border);
-        padding: 12px 13px 13px;
-        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
-      }
-
-      .feature-icon {
-        width: 26px;
-        height: 26px;
-        border-radius: 999px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
+        color: var(--text);
         margin-bottom: 8px;
       }
 
-      .feature-icon.scan {
-        background: #eef2ff;
-        color: #4f46e5;
+      .phone-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
       }
 
-      .feature-icon.tag {
-        background: #fef3c7;
-        color: #d97706;
+      .phone-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--white);
+        border: 1px solid var(--border);
       }
 
-      .feature-icon.manual {
-        background: #dcfce7;
-        color: #16a34a;
-      }
-
-      .feature-title {
+      .phone-card-emoji {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        background: var(--success-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 14px;
+      }
+
+      .phone-card-text {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .phone-card-sub {
+        font-size: 10px;
+        color: var(--text-secondary);
+        margin-top: 1px;
+      }
+
+      .phone-basket {
+        border-radius: 14px;
+        background: #ecfdf5;
+        border: 1px solid #bbf7d0;
+        padding: 12px;
+      }
+
+      .phone-basket-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
         font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .phone-basket-total {
+        color: var(--primary);
+      }
+
+      .phone-basket-rows {
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+
+      .phone-basket-rows div {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 4px;
       }
 
-      .feature-body {
-        font-size: 13px;
-        color: var(--text-secondary);
-      }
-
-      .feature-microcopy {
-        margin-top: 6px;
+      .phone-save {
+        margin-top: 8px;
         font-size: 11px;
-        color: var(--placeholder);
-      }
-
-      .pill-row {
+        color: var(--primary);
+        font-weight: 600;
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         gap: 6px;
-        margin-top: 10px;
       }
 
-      .pill {
-        padding: 4px 9px;
-        border-radius: 999px;
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.85);
-        font-size: 11px;
+      .phone-save::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+      }
+
+      /* ----- Features ----- */
+      .section {
+        margin-top: 48px;
+      }
+
+      @media (min-width: 640px) {
+        .section {
+          margin-top: 64px;
+        }
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+
+      .section-desc {
+        font-size: 14px;
         color: var(--text-secondary);
+        margin: 0 0 24px;
+        max-width: 28em;
       }
 
-      .pill.success {
+      .features {
+        display: grid;
+        gap: 16px;
+      }
+
+      @media (min-width: 640px) {
+        .features {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .feature {
+        padding: 18px;
+        border-radius: var(--radius-lg);
+        background: var(--white);
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      }
+
+      .feature-ico {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+
+      .feature-ico.receipt {
+        background: #eef2ff;
+      }
+
+      .feature-ico.tags {
+        background: #fef3c7;
+      }
+
+      .feature-ico.manual {
         background: var(--success-light);
-        border-color: #bbf7d0;
-        color: #166534;
       }
 
-      footer {
+      .feature h3 {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0 0 6px;
+      }
+
+      .feature p {
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+
+      .download-block {
         margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #e5e7eb;
+        padding: 28px 24px;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
+        border: 1px solid #a7f3d0;
+        text-align: center;
+      }
+
+      @media (min-width: 640px) {
+        .download-block {
+          margin-top: 48px;
+          padding: 32px;
+        }
+      }
+
+      .download-block h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+
+      .download-block p {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin: 0 0 20px;
+      }
+
+      .download-block .app-store-btn {
+        margin: 0 auto;
+      }
+
+      /* ----- Footer ----- */
+      .footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 12px;
         justify-content: space-between;
+        gap: 16px;
         font-size: 12px;
         color: var(--text-secondary);
       }
 
-      footer a {
+      .footer a {
         color: var(--text-secondary);
         text-decoration: none;
       }
 
-      footer a:hover {
+      .footer a:hover {
         color: var(--text);
         text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <div class="page-shell">
-      <header>
+    <div class="page">
+      <header class="header">
         <div class="brand">
-          <div class="brand-logo">
-            <img src="./icon.png" alt="FrugalGrocery logo" />
+          <div class="brand-icon">
+            <img src="./icon.png" alt="" />
           </div>
-          <div class="brand-text">
-            <div class="brand-name">FrugalGrocery</div>
-            <div class="brand-tagline">Smart lists. Smarter savings.</div>
+          <div>
+            <div class="brand-name">Frugal Grocery</div>
+            <div class="brand-tag">Where's cheap?</div>
           </div>
         </div>
-        <nav>
-          <a href="#how-it-works">How it works</a>
-          <a href="#features">Features</a>
-          <a href="../FrugalGrocery/privacy.html" target="_blank" rel="noreferrer">Privacy</a>
-          <a href="../FrugalGrocery/termOfService.html" target="_blank" rel="noreferrer">Terms</a>
-          <span class="nav-cta">Coming soon</span>
-        </nav>
+        <a
+          href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
+          class="header-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          Download
+        </a>
       </header>
 
       <main>
-        <section aria-label="FrugalGrocery hero">
-          <div class="hero-eyebrow">
-            <span class="hero-eyebrow-badge"></span>
-            Build grocery lists that actually save you money.
+        <div class="hero-wrap">
+          <section class="hero" aria-label="Hero">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              Free to try · In‑app purchases
+            </div>
+            <p class="hero-hook">
+              <em>"I need to buy eggs—but maybe in another store they cost less?"</em>
+            </p>
+            <h1 class="hero-title">
+              Know where to shop.<br />
+              <span>Save every week.</span>
+            </h1>
+            <p class="hero-desc">
+              Scan receipts and price tags. Build smart lists. We tell you where your
+              basket costs less—so you never overpay again.
+            </p>
+            <div class="hero-cta">
+              <a
+                href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
+                class="app-store-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Download on the App Store
+              </a>
+              <p class="hero-meta">
+                <strong>iPhone & iPad</strong> · No account required
+              </p>
+            </div>
+          </section>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="phone-status">
+                  <div class="phone-app">
+                    <div class="phone-app-icon">
+                      <img src="./icon.png" alt="" />
+                    </div>
+                    <div>
+                      <div class="phone-app-name">Weekly basket</div>
+                      <div class="phone-app-sub">3 stores compared</div>
+                    </div>
+                  </div>
+                  <span class="phone-badge">AI scan</span>
+                </div>
+                <div class="phone-tabs">
+                  <div class="phone-tab on">Receipt</div>
+                  <div class="phone-tab">Price tags</div>
+                  <div class="phone-tab">Manual</div>
+                </div>
+                <div class="phone-body">
+                  <div class="phone-label">Add prices your way</div>
+                  <div class="phone-cards">
+                    <div class="phone-card">
+                      <div class="phone-card-emoji">📄</div>
+                      <div>
+                        <div class="phone-card-text">Scan receipt</div>
+                        <div class="phone-card-sub">AI reads products & prices</div>
+                      </div>
+                    </div>
+                    <div class="phone-card">
+                      <div class="phone-card-emoji">🏷️</div>
+                      <div>
+                        <div class="phone-card-text">Snap price tags</div>
+                        <div class="phone-card-sub">Capture shelf prices</div>
+                      </div>
+                    </div>
+                    <div class="phone-card">
+                      <div class="phone-card-emoji">⌨️</div>
+                      <div>
+                        <div class="phone-card-text">Type it in</div>
+                        <div class="phone-card-sub">Quick edits & manual entry</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="phone-label">This week's basket</div>
+                  <div class="phone-basket">
+                    <div class="phone-basket-head">
+                      <span>Store A</span>
+                      <span class="phone-basket-total">$68.40</span>
+                    </div>
+                    <div class="phone-basket-rows">
+                      <div><span>Milk 2L</span> <span>$2.39</span></div>
+                      <div><span>Chicken breast</span> <span>$8.99</span></div>
+                      <div><span>Fresh veggies</span> <span>$12.80</span></div>
+                    </div>
+                    <div class="phone-save">Save up to $11.20 at Store C</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <h1>
-            Compare prices across stores.<br />
-            <span>Shop the cheapest basket.</span>
-          </h1>
-          <p class="hero-subtitle">
-            FrugalGrocery turns your receipts, price tags, and quick manual notes into a
-            single smart view of what each basket really costs&mdash;so you never
-            overpay for your weekly shop again.
+        </div>
+
+        <section class="section" id="features" aria-label="Features">
+          <h2 class="section-title">Designed for how you really shop</h2>
+          <p class="section-desc">
+            Track prices, scan receipts and price tags, and always know where to shop
+            for the best deals.
           </p>
-
-          <div class="hero-highlights">
-            <div class="hero-pill">
-              <strong>No account</strong> &mdash; works right on your device.
-            </div>
-            <div class="hero-pill">
-              <strong>AI powered</strong> receipt &amp; price tag scanning.
-            </div>
-            <div class="hero-pill">
-              <strong>Subscription</strong> for unlimited features, no refunds.
-            </div>
+          <div class="features">
+            <article class="feature">
+              <div class="feature-ico receipt">📄</div>
+              <h3>Scan or upload receipts</h3>
+              <p>
+                Point your camera at your receipt or upload a photo. AI extracts
+                products and prices and saves them to your chosen store.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature-ico tags">🏷️</div>
+              <h3>Capture price tags in‑store</h3>
+              <p>
+                Snap price tags as you walk the aisles. Build a live price map of
+                every store and compare in seconds.
+              </p>
+            </article>
+            <article class="feature">
+              <div class="feature-ico manual">⌨️</div>
+              <h3>Fast manual entry</h3>
+              <p>
+                Add or fix items, quantities, and prices anytime. Perfect for bulk
+                items, farmers' markets, or when you're in a rush.
+              </p>
+            </article>
           </div>
 
-          <div class="hero-actions">
-            <button class="btn-primary" type="button">
-              Get notified at launch <span class="chevron">➜</span>
-            </button>
-            <div class="btn-ghost">
-              <span class="btn-ghost-dot"></span>
-              Works without creating an account.
-            </div>
+          <div class="download-block">
+            <h2>Get Frugal Grocery on iPhone or iPad</h2>
+            <p>Free to try. Unlock unlimited scans and lists with a subscription.</p>
+            <a
+              href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
+              class="app-store-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Download on the App Store
+            </a>
           </div>
-
-          <p class="hero-footnote">
-            <strong>Three ways to add prices:</strong> scan receipts, scan price tags,
-            or type them yourself. Your images are only processed to extract product
-            and price information for your lists.
-          </p>
         </section>
-
-        <aside class="hero-visual" id="how-it-works" aria-label="App preview mock">
-          <div class="phone-frame">
-            <div class="phone-inner">
-              <div class="phone-header">
-                <div class="phone-header-left">
-                  <div class="phone-logo">
-                    <img src="./icon.png" alt="" />
-                  </div>
-                  <div>
-                    <div class="phone-title">Weekly basket</div>
-                    <div class="phone-tag">3 stores compared</div>
-                  </div>
-                </div>
-                <div class="phone-chip">AI scan ready</div>
-              </div>
-
-              <div class="phone-tabs">
-                <div class="phone-tab active">Receipt</div>
-                <div class="phone-tab">Price tags</div>
-                <div class="phone-tab">Manual</div>
-              </div>
-
-              <div class="phone-body">
-                <div class="phone-section-title">Add prices your way</div>
-                <div class="phone-features">
-                  <div class="phone-feature-card">
-                    <div class="phone-feature-icon">📄</div>
-                    <div class="phone-feature-text">
-                      Scan receipt
-                      <span>AI reads products &amp; prices for you.</span>
-                    </div>
-                  </div>
-                  <div class="phone-feature-card">
-                    <div class="phone-feature-icon">🏷️</div>
-                    <div class="phone-feature-text">
-                      Snap price tags
-                      <span>Capture shelf prices in seconds.</span>
-                    </div>
-                  </div>
-                  <div class="phone-feature-card">
-                    <div class="phone-feature-icon">⌨️</div>
-                    <div class="phone-feature-text">
-                      Type it in
-                      <span>Perfect for quick edits &amp; fixes.</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="phone-section-title">This week&apos;s basket</div>
-                <div class="phone-list-card">
-                  <div class="phone-list-header">
-                    <span>Store A</span>
-                    <small>$68.40</small>
-                  </div>
-                  <div class="phone-items">
-                    <div class="phone-item-row">
-                      <span>Milk 2L</span>
-                      <small>$2.39</small>
-                    </div>
-                    <div class="phone-item-row">
-                      <span>Chicken breast</span>
-                      <small>$8.99</small>
-                    </div>
-                    <div class="phone-item-row">
-                      <span>Fresh veggies</span>
-                      <small>$12.80</small>
-                    </div>
-                  </div>
-                  <div class="phone-savings">
-                    <span class="phone-savings-dot"></span>
-                    Save up to $11.20 by switching to Store C.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="phone-floating-tag">
-            No login. <strong>Your prices, your device.</strong>
-          </div>
-          <div class="phone-floating-badge">
-            Unlimited AI scans with subscription. No refunds.
-          </div>
-        </aside>
       </main>
 
-      <section class="section" id="features" aria-label="FrugalGrocery features">
-        <div class="section-header">
-          <div class="section-title">Designed for how you really shop</div>
-          <p class="section-subtitle">
-            FrugalGrocery removes the busywork of tracking prices, so you can focus on
-            choosing the right basket instead of juggling notes and photos.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon scan">📄</div>
-            <h2 class="feature-title">Scan or upload receipts</h2>
-            <p class="feature-body">
-              Point your camera at your grocery receipt or upload a photo. FrugalGrocery&apos;s
-              AI extracts the product names and prices and assigns them to the store.
-            </p>
-            <p class="feature-microcopy">
-              We only use your photos to pull out the information needed for your lists.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon tag">🏷️</div>
-            <h2 class="feature-title">Capture price tags in‑store</h2>
-            <p class="feature-body">
-              Snap individual price tags as you walk the aisles. Build your own live
-              price map of every store you visit and compare them in seconds.
-            </p>
-            <p class="feature-microcopy">
-              Great for checking &quot;specials&quot; against your usual store.
-            </p>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon manual">⌨️</div>
-            <h2 class="feature-title">Fast manual entry</h2>
-            <p class="feature-body">
-              Prefer typing? Quickly add or fix items, quantities, and prices anytime.
-              Perfect for bulk items, farmers&apos; markets, or when you&apos;re in a
-              rush.
-            </p>
-            <p class="feature-microcopy">
-              Your data stays focused on products, prices, and stores&mdash;not you.
-            </p>
-          </article>
-        </div>
-
-        <div class="pill-row">
-          <div class="pill success">No account required</div>
-          <div class="pill">Subscription unlocks unlimited AI features</div>
-          <div class="pill">Non‑refundable payments</div>
-          <div class="pill">Minimal data about you</div>
-          <div class="pill">Built for everyday grocery shoppers</div>
-        </div>
-      </section>
-
-      <footer>
-        <div>&copy; <span id="year"></span> FrugalGrocery. All rights reserved.</div>
+      <footer class="footer">
+        <div>&copy; <span id="year"></span> Frugal Grocery. All rights reserved.</div>
         <div>
-          <a href="../FrugalGrocery/privacy.html" target="_blank" rel="noreferrer">Privacy</a>
-          &nbsp;&middot;&nbsp;
-          <a href="../FrugalGrocery/termOfService.html" target="_blank" rel="noreferrer"
-            >Terms of Service</a
-          >
+          <a href="./privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
+          &nbsp;·&nbsp;
+          <a href="./termOfService.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
         </div>
       </footer>
     </div>
 
     <script>
-      // Set current year in footer
       (function () {
         var el = document.getElementById('year');
         if (el) el.textContent = new Date().getFullYear();
@@ -874,4 +846,3 @@
     </script>
   </body>
 </html>
-
