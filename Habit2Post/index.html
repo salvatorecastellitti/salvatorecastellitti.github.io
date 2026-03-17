@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit2Post - AI-Powered Social Growth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --primary-color: #3b82f6;
+            --secondary-color: #1e293b;
+            --accent-color: #60a5fa;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .features {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature-card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 300px;
+            text-align: left;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Habit2Post</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Rank Better. Grow Faster.</h1>
+            <p>Leverage the power of Google AI to analyze and optimize your content. Take control of your social presence with smart insights.</p>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>Powered by Google AI</h3>
+                <p>Advanced artificial intelligence at your fingertips to help you understand what works and what doesn't.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Secure Data Storage</h3>
+                <p>Your data is securely stored using Supabase. You have full control over your account and data deletion.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Own Your Content</h3>
+                <p>We respect your ownership. You maintain full rights to all content you create and process through Habit2Post.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="tos.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+        <p class="contact">
+            Questions? Contact us at <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a>
+        </p>
+    </footer>
+</body>
+</html>
