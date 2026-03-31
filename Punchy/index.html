@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punchy — Punch. Score. Repeat.</title>
+    <meta name="description"
+        content="Punchy is the ultimate punch-tracking game for your phone. Throw punches, beat your high score, and compete for glory.">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --red: #C44A3A;
+            --amber: #D97A2B;
+            --yellow: #F2D479;
+            --black: #111111;
+            --bg: #1A1A1A;
+            --surface: #2A2A2A;
+            --white: #FFFFFF;
+            --muted: rgba(255, 255, 255, 0.55);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--red);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-brand span {
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--yellow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--yellow);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 7rem 1.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* brutalist grid background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(196, 74, 58, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(196, 74, 58, 0.07) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+
+        /* glow blob */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, rgba(196, 74, 58, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 24px rgba(196, 74, 58, 0.6));
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title .line-red {
+            color: var(--red);
+        }
+
+        .hero-title .line-white {
+            color: var(--white);
+        }
+
+        .hero-title .line-yellow {
+            color: var(--yellow);
+        }
+
+        .hero-sub {
+            margin-top: 1.5rem;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--muted);
+            max-width: 440px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-cta {
+            margin-top: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            border: 2px solid transparent;
+            transition: transform 0.15s, box-shadow 0.15s;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            transform: translateY(2px) !important;
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: var(--white);
+            border-color: var(--red);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .btn-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--yellow);
+            border-color: var(--yellow);
+            box-shadow: 4px 4px 0 rgba(242, 212, 121, 0.25);
+        }
+
+        .btn-outline:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(242, 212, 121, 0.25);
+        }
+
+        /* ── FEATURES ── */
+        .features {
+            padding: 6rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 3.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--red), var(--amber));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(196, 74, 58, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), var(--amber), transparent);
+            margin: 0 1.5rem;
+        }
+
+        /* ── DOWNLOAD ── */
+        .download {
+            padding: 6rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 100%, rgba(217, 122, 43, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .download .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .download-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .store-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.6rem;
+            background: var(--surface);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, transform 0.2s;
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .store-badge:hover {
+            border-color: var(--amber);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .store-badge svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .badge-text {
+            text-align: left;
+        }
+
+        .badge-text small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-text strong {
+            font-size: 1rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-brand img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            opacity: 0.7;
+        }
+
+        .footer-brand span {
+            font-size: 0.9rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-copy {
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.78rem;
+            width: 100%;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-logo {
+                width: 90px;
+                height: 90px;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="punchylogo.png" alt="Punchy logo">
+            <span>Punchy</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="tos.html">Terms</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <img src="../assets/images/punchylogo.png" alt="Punchy" class="hero-logo">
+        <p class="hero-eyebrow">The phone-punch game</p>
+        <h1 class="hero-title">
+            <span class="line-red">Punch.</span><br>
+            <span class="line-white">Score.</span><br>
+            <span class="line-yellow">Repeat.</span>
+        </h1>
+        <p class="hero-sub">Turn your phone into a punch tracker. Throw real punches, measure your power, and beat your
+            personal best.</p>
+        <div class="hero-cta">
+            <a href="#download" class="btn btn-primary">Get the App</a>
+            <a href="#features" class="btn btn-outline">See Features</a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <p class="section-label">What's inside</p>
+        <h2 class="section-title">Built to <span style="color:var(--red)">Hit</span> Hard</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">👊</span>
+                <p class="feature-name">Real Punch Detection</p>
+                <p class="feature-desc">Uses your device's accelerometer to measure actual punch intensity in real time.
+                    No tapping, no swiping — throw real punches.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🏆</span>
+                <p class="feature-name">Score History</p>
+                <p class="feature-desc">Every session is saved locally on your device. Track your progress over time and
+                    see how hard you've been hitting.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <p class="feature-name">Instant Feedback</p>
+                <p class="feature-desc">Animations, haptics, and sounds respond to every punch. Feel the impact with
+                    each throw.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <p class="feature-name">100% Offline</p>
+                <p class="feature-desc">No account, no sign-up, no cloud. Your data never leaves your device. Just open
+                    and punch.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🚫</span>
+                <p class="feature-name">Remove Ads</p>
+                <p class="feature-desc">Support the dev and play distraction-free with a one-time purchase to remove all
+                    ads permanently.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎮</span>
+                <p class="feature-name">Free to Play</p>
+                <p class="feature-desc">Download for free and start punching immediately. No paywalls blocking the core
+                    game.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- DOWNLOAD -->
+    <section class="download" id="download">
+        <p class="section-label">Available now</p>
+        <h2 class="section-title">Download <span style="color:var(--amber)">Free</span></h2>
+        <p class="download-sub">Available on iOS and Android. No account required.</p>
+        <div class="store-badges">
+            <a href="#" class="store-badge">
+                <!-- Apple icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                <span class="badge-text">
+                    <small>Download on the</small>
+                    <strong>App Store</strong>
+                </span>
+            </a>
+            <a href="#" class="store-badge">
+                <!-- Google Play icon -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M3.18 23.76a2 2 0 0 1-.92-.23L13 12 3.26.47a2 2 0 0 1 .92-.23c.37 0 .73.1 1.04.28l12.26 7.1-3.5 3.5L3.18 23.76zm17.12-9.54L17.65 12l2.65-2.22 1.3.75a1.96 1.96 0 0 1 0 3.4l-1.3.29zM2 1.38l10.26 10.26L2 21.9V1.38z" />
+                </svg>
+                <span class="badge-text">
+                    <small>Get it on</small>
+                    <strong>Google Play</strong>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">
+            <img src="../assets/images/punchylogo.png" alt="Punchy">
+            <span>Punchy</span>
+        </div>
+        <ul class="footer-links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="tos.html">Terms of Service</a></li>
+            <li><a href="mailto:s.castellitti.dev@gmail.com">Support</a></li>
+        </ul>
+        <p class="footer-copy">&copy; 2026 Salvatore Castellitti &mdash; All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

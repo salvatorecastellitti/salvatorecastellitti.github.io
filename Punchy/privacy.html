@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Punchy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --primary-color: #e85d3a;
+            --accent-color: #f59e0b;
+            --muted-text: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: var(--glass-bg);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-top: 2rem;
+        }
+
+        p,
+        li {
+            color: var(--muted-text);
+            font-size: 1.05rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--muted-text);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <span class="logo">Punchy</span>
+    </header>
+
+    <main>
+        <h1>Privacy Policy</h1>
+        <p>Last Updated: March 2026</p>
+
+        <p>This Privacy Policy explains how Salvatore Castellitti ("we," "us," or "our") collects, uses, and discloses
+            information about you when you use the <strong>Punchy</strong> mobile application ("the App").</p>
+
+        <h2>1. No Account Required</h2>
+        <p>Punchy does not require you to create an account or provide any personal information to use the App. All game
+            data (punch sessions and scores) is stored exclusively on your device and is never transmitted to our
+            servers.</p>
+
+        <h2>2. Data We Collect</h2>
+        <p>We do not collect or store any personal data on our own servers. However, the App uses third-party services
+            that may collect data as described below:</p>
+        <ul>
+            <li><strong>Device sensor data:</strong> The App uses your device's accelerometer to measure punch
+                intensity. This data is processed entirely on-device and is never sent externally.</li>
+            <li><strong>Local storage:</strong> Punch session history and scores are saved locally on your device using
+                AsyncStorage. You can delete this data at any time from the Settings screen.</li>
+        </ul>
+
+        <h2>3. Advertising — Google AdMob</h2>
+        <p>The free version of Punchy displays advertisements provided by <strong>Google AdMob</strong>
+            (<a href="https://admob.google.com" target="_blank" rel="noopener">admob.google.com</a>), a service operated
+            by Google LLC. AdMob may collect and use data to show you personalized ads, including:</p>
+        <ul>
+            <li>Advertising identifiers (IDFA on iOS, GAID on Android)</li>
+            <li>IP address and approximate location</li>
+            <li>Device information (model, OS version)</li>
+            <li>App usage and interaction data</li>
+            <li>Cookies and similar tracking technologies</li>
+        </ul>
+        <p>On iOS 14.5 and later, the App will ask for your permission to track you via Apple's App Tracking
+            Transparency (ATT) framework before any personalized advertising data is collected. You may deny this
+            permission; you will still see ads, but they will not be personalized.</p>
+        <p>Google's use of advertising data is governed by Google's Privacy Policy:
+            <a href="https://policies.google.com/privacy" target="_blank"
+                rel="noopener">policies.google.com/privacy</a>.
+        </p>
+
+        <h2>4. How to Opt Out of Personalized Advertising</h2>
+        <p>You have several options to limit interest-based advertising:</p>
+        <ul>
+            <li><strong>iOS:</strong> Go to <em>Settings → Privacy & Security → Tracking</em> and disable "Allow Apps
+                to Request to Track", or reset your Advertising Identifier.</li>
+            <li><strong>Android:</strong> Go to <em>Settings → Google → Ads</em> and enable "Opt out of Ads
+                Personalization", or reset your Advertising ID.</li>
+            <li><strong>Remove Ads purchase:</strong> You can purchase the "Remove Ads" in-app purchase from the
+                Settings screen to permanently remove all advertisements from the App. Once purchased, AdMob will no
+                longer be initialized and no advertising data will be collected.</li>
+            <li><strong>Google's opt-out tool:</strong> Visit
+                <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>
+                to manage your Google ad preferences.
+            </li>
+        </ul>
+
+        <h2>5. In-App Purchases</h2>
+        <p>Punchy offers a one-time in-app purchase ("Remove Ads") processed through Apple App Store or Google Play.
+            Purchase transactions are handled entirely by Apple or Google and are subject to their respective privacy
+            policies. We do not receive or store your payment information. In-app purchases are managed via
+            <strong>RevenueCat</strong>, which may collect anonymized purchase-event data for the purpose of validating
+            and restoring purchases. See RevenueCat's privacy policy at
+            <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a>.
+        </p>
+
+        <h2>6. Children's Privacy</h2>
+        <p>The App is not directed to children under the age of 13. We do not knowingly collect personal information
+            from children under 13. If you believe a child under 13 has used the App and data has been collected,
+            please contact us at the address below.</p>
+
+        <h2>7. Data Retention and Deletion</h2>
+        <p>Since all game data is stored locally on your device, you have full control over it. You can permanently
+            delete all punch history from <em>Settings → Clear All History</em>. Uninstalling the App will also remove
+            all locally stored data.</p>
+
+        <h2>8. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by
+            updating the "Last Updated" date at the top of this page. Continued use of the App after changes
+            constitutes acceptance of the updated policy.</p>
+
+        <h2>9. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or your data, please contact us at:<br>
+            <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a>
+        </p>
+    </main>
+
+    <footer>
+        <a href="tos.html">Terms of Service</a> | &copy; 2026 Salvatore Castellitti
+    </footer>
+</body>
+
+</html>
