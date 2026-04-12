@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - FrugalGrocery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text: #ECEDEE;
+            --background: #121212;
+            --tint: #14b8a6;
+            --icon: #9BA1A6;
+            --card: #1E1E1E;
+            --border: #27272a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--background);
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--tint);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--tint);
+            letter-spacing: -0.02em;
+        }
+
+        .last-updated {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--tint);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--tint);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .summary h2 {
+            margin-top: 0;
+        }
+
+        .summary ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .summary li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .summary li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--tint);
+        }
+
+        .toc {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+        }
+
+        .toc ol {
+            list-style: decimal;
+            margin-left: 20px;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: var(--tint);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            background: rgba(20, 184, 166, 0.1);
+            border: 2px solid var(--tint);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .contact-info h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(20, 184, 166, 0.2);
+            color: var(--tint);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        strong {
+            color: var(--tint);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--tint);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        .highlight {
+            background: rgba(20, 184, 166, 0.1);
+            padding: 20px;
+            border-left: 4px solid var(--tint);
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 10px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FRUGALGROCERY PRIVACY POLICY</h1>
+            <p class="last-updated">Last updated January 28, 2026</p>
+        </header>
+
+        <section>
+            <p>This Privacy Policy explains how FrugalGrocery ("we", "us", or "our") handles information when you use the FrugalGrocery mobile application ("App").</p>
+            <p>FrugalGrocery helps you build shopping lists based on prices from different stores that you manually manage or capture via photos. The App is designed to work with minimal data and <strong>without any user accounts</strong>.</p>
+            <p>If you have any questions about this Policy, you can contact us at <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a>.</p>
+        </section>
+
+        <section class="summary">
+            <h2>SUMMARY OF KEY POINTS</h2>
+            <p>This is a short summary. For full details, please read the entire Privacy Policy below.</p>
+
+            <ul>
+                <li><strong>No account, no profile.</strong> You do not create an account and we do not build a user profile about you.</li>
+                <li><strong>We do not store personal data about you.</strong> We do not store your name, email, address, or any identifiers that can directly identify you.</li>
+                <li><strong>What you add is about products and prices.</strong> You can add prices in three ways: (1) scan/upload receipts, (2) scan/upload price tags, or (3) manual input. The App and its AI only care about the <strong>product name, store name, quantity, and price</strong>.</li>
+                <li><strong>Photos are processed by AI only to extract text.</strong> Photos are sent to AI to extract the relevant product and price information needed for the App to work. We do not use photos to identify you.</li>
+                <li><strong>We aim to keep processing transient.</strong> Photos are kept only as long as needed for extraction and are not kept to build a history of you as a person.</li>
+                <li><strong>Subscription, no refunds.</strong> There is an optional subscription that unlocks unlimited features. All payments are <strong>non-refundable</strong>, as also stated in the Terms of Service.</li>
+                <li><strong>No advertising profile.</strong> We do not use your data to build advertising profiles or track you across other apps or websites.</li>
+            </ul>
+        </section>
+
+        <section class="toc">
+            <h2>TABLE OF CONTENTS</h2>
+            <ol>
+                <li><a href="#section1">1. WHAT INFORMATION DOES FRUGALGROCERY HANDLE?</a></li>
+                <li><a href="#section2">2. HOW ARE PHOTOS AND AI PROCESSING HANDLED?</a></li>
+                <li><a href="#section3">3. WHERE IS INFORMATION STORED?</a></li>
+                <li><a href="#section4">4. SUBSCRIPTION, PAYMENTS, AND REFUNDS</a></li>
+                <li><a href="#section5">5. DATA RETENTION</a></li>
+                <li><a href="#section6">6. CHILDREN'S PRIVACY</a></li>
+                <li><a href="#section7">7. CHANGES TO THIS POLICY</a></li>
+                <li><a href="#section8">8. CONTACT</a></li>
+            </ol>
+        </section>
+
+        <section id="section1">
+            <h2>1. WHAT INFORMATION DOES FRUGALGROCERY HANDLE?</h2>
+
+            <p><strong>In Short:</strong> The App focuses on <strong>store, product, quantity, and price data</strong>. We do not ask for or store information that directly identifies you.</p>
+
+            <div class="highlight">
+                <p><strong>Data related to prices and products:</strong></p>
+                <ul>
+                    <li><strong>Receipts you scan or upload:</strong> Photos of receipts that contain store name, product names, quantities, and prices.</li>
+                    <li><strong>Price tags you scan or upload:</strong> Photos of shelf tags or price labels with product names and prices.</li>
+                    <li><strong>Manually entered data:</strong> Store names, product names, quantities, and prices that you type into the App.</li>
+                </ul>
+            </div>
+
+            <p><strong>Information we deliberately do not collect:</strong></p>
+            <ul>
+                <li>No account or login (no username, no password).</li>
+                <li>No email address or phone number for using the App.</li>
+                <li>No home address, shipping address, or similar personal information.</li>
+                <li>No biometric data used for identification (we do not try to recognize who you are).</li>
+            </ul>
+
+            <p><strong>Technical information.</strong> The App may process basic technical data (such as device model, operating system version, crash logs) only as needed to keep the App running securely and to fix bugs. This is standard for most apps and is not used to build a marketing or advertising profile.</p>
+        </section>
+
+        <section id="section2">
+            <h2>2. HOW ARE PHOTOS AND AI PROCESSING HANDLED?</h2>
+
+            <p><strong>In Short:</strong> Photos are used solely so that AI can read the text on receipts or price tags and turn that into product and price entries for your lists.</p>
+
+            <div class="highlight">
+                <p><strong>When you upload or take a photo:</strong></p>
+                <ul>
+                    <li>The photo is sent to an AI service to extract <strong>only the information needed</strong> for FrugalGrocery: store name (if present), product names, quantities, and prices.</li>
+                    <li>The result of the extraction is saved as structured data inside the App (for example: "Store X – Milk 1L – €1.20").</li>
+                    <li>The goal is that photos are <strong>temporary</strong> and kept only as long as needed for the extraction process.</li>
+                </ul>
+            </div>
+
+            <p><strong>No facial recognition or identity building.</strong> Photos may incidentally include other content (e.g., your hand, table, or background), but we do not use the images to recognize you or to build an identity profile.</p>
+
+            <p><strong>Manual input is always an option.</strong> You can choose to skip photos and enter all data manually if you prefer not to use image-based AI processing.</p>
+        </section>
+
+        <section id="section3">
+            <h2>3. WHERE IS INFORMATION STORED?</h2>
+
+            <p><strong>In Short:</strong> We design FrugalGrocery so that information is limited and, where possible, kept on your device.</p>
+
+            <ul>
+                <li><strong>On your device:</strong> Your lists, products, and prices are primarily stored on your device so that the App can function even when you are offline.</li>
+                <li><strong>On our or third-party servers (if used):</strong> If remote processing or syncing is used, we only send what is strictly necessary (e.g., a photo to extract prices, or aggregated price data). We do not attach information like your name, email, or other identifying profile data, because we do not collect them.</li>
+            </ul>
+
+            <p>We do not sell your data and we do not use your data to track you across other apps or websites for advertising.</p>
+        </section>
+
+        <section id="section4">
+            <h2>4. SUBSCRIPTION, PAYMENTS, AND REFUNDS</h2>
+
+            <p><strong>In Short:</strong> FrugalGrocery offers an optional subscription that unlocks unlimited features. Payments are handled by the app store, and <strong>there are no refunds</strong>.</p>
+
+            <div class="highlight">
+                <p><strong>Subscription:</strong></p>
+                <ul>
+                    <li>The App may be used for free with limitations.</li>
+                    <li>An optional subscription unlocks unlimited or advanced features (for example, unlimited AI processing).</li>
+                    <li>The exact features included in the subscription are described in the App at the time of purchase.</li>
+                </ul>
+            </div>
+
+            <p><strong>Payments.</strong> All payments are processed by the platform where you downloaded the App (for example, Apple App Store or Google Play Store). We do <strong>not</strong> see or store your full payment card details. The platform may share anonymous purchase information that is needed only to know whether your subscription is active.</p>
+
+            <p><strong>No refunds.</strong> All purchases and subscriptions are <strong>final and non-refundable</strong>, as detailed in the Terms of Service and the applicable app store rules. Please review the price and terms carefully before subscribing.</p>
+        </section>
+
+        <section id="section5">
+            <h2>5. DATA RETENTION</h2>
+
+            <p><strong>In Short:</strong> We keep information only as long as necessary for the App to function or as required by law.</p>
+
+            <div class="highlight">
+                <p><strong>Practically, this means:</strong></p>
+                <ul>
+                    <li>Price and product data are kept as long as they remain in your lists in the App.</li>
+                    <li>Photos used for AI extraction are intended to be kept only temporarily, for the time needed to run the extraction.</li>
+                    <li>Any technical logs (for example, crash reports) are kept only as long as needed to maintain and improve the App.</li>
+                </ul>
+            </div>
+
+            <p>If at any time you want to stop using FrugalGrocery, you can uninstall the App from your device, which will remove locally stored data. Because we do not operate user accounts, there is usually no central profile for us to delete.</p>
+        </section>
+
+        <section id="section6">
+            <h2>6. CHILDREN'S PRIVACY</h2>
+
+            <p>FrugalGrocery is not designed for children under 13 years of age. We do not knowingly collect information about children and we do not create accounts for them. If you believe a child has used the App and shared information that should be removed, please contact us at <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a>.</p>
+        </section>
+
+        <section id="section7">
+            <h2>7. CHANGES TO THIS POLICY</h2>
+
+            <p>We may update this Privacy Policy from time to time to reflect changes in how the App works or to stay compliant with applicable laws. When we make changes, we will update the "Last updated" date at the top of this page. In some cases, we may also display a notice inside the App.</p>
+        </section>
+
+        <section id="section8" class="contact-info">
+            <h2>8. CONTACT</h2>
+            <p>If you have any questions, concerns, or feedback about this Privacy Policy or how FrugalGrocery handles information, you can contact us at:</p>
+
+            <p>
+                <strong>Email:</strong> <a href="mailto:s.castellitti.dev@gmail.com">s.castellitti.dev@gmail.com</a><br>
+            </p>
+        </section>
+    </div>
+</body>
+</html>
