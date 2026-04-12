@@ -1,848 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frugal Grocery: Where's cheap? — Track prices, save on groceries</title>
-    <meta
-      name="description"
-      content="Track grocery prices, scan receipts and price tags, and always know where to shop for the best deals. Build smart shopping lists and save more."
-    />
-    <link rel="icon" type="image/png" href="./icon.png" />
-    <style>
-      :root {
-        --primary: #10b981;
-        --bg: #f4f6f5;
-        --text: #1f2937;
-        --text-secondary: #6b7280;
-        --placeholder: #9ca3af;
-        --white: #ffffff;
-        --border: #e5e7eb;
-        --success: #22c55e;
-        --success-light: #dcfce7;
-        --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
-        --radius-xl: 24px;
-        --radius-lg: 18px;
-        --radius-md: 14px;
-        --radius-pill: 999px;
-        --safe-top: env(safe-area-inset-top, 0);
-        --safe-bottom: env(safe-area-inset-bottom, 0);
-      }
 
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framr — Extract the moments that matter</title>
+  <meta name="description"
+    content="Upload a video, let AI find the best frames. Your video is deleted from our servers the moment processing is done." />
+  <link rel="icon" type="image/png" href="./icon.png" />
+  <style>
+    :root {
+      --bg: #0b0d0e;
+      --bg-alt: #111416;
+      --fg: #f0f0ef;
+      --muted: #8a9099;
+      --accent: #3d6b56;
+      --accent-light: #5a9478;
+      --accent-glow: rgba(61, 107, 86, 0.18);
+      --purple: #7a5aab;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
 
-      html {
-        -webkit-tap-highlight-color: transparent;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+    html {
+      -webkit-tap-highlight-color: transparent;
+    }
 
+    body {
+      margin: 0;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 20px 48px;
+    }
+
+    @media (min-width: 640px) {
       .page {
-        width: 100%;
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 16px 20px 32px;
-        padding-top: calc(12px + var(--safe-top));
-        padding-bottom: calc(32px + var(--safe-bottom));
-      }
-
-      @media (min-width: 640px) {
-        .page {
-          padding: 24px 28px 48px;
-        }
-      }
-
-      /* ----- Header (mobile-first) ----- */
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 28px;
-      }
-
-      @media (min-width: 640px) {
-        .header {
-          margin-bottom: 40px;
-        }
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .brand-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        background: var(--white);
-        border: 1px solid #d1fae5;
-        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .brand-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .brand-name {
-        font-weight: 700;
-        font-size: 17px;
-        letter-spacing: 0.02em;
-      }
-
-      .brand-tag {
-        font-size: 11px;
-        color: var(--text-secondary);
-        margin-top: 1px;
-      }
-
-      .header-cta {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 10px 16px;
-        border-radius: var(--radius-pill);
-        background: #111827;
-        color: var(--white);
-        font-size: 13px;
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: 0 4px 14px rgba(17, 24, 39, 0.35);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-      }
-
-      .header-cta:active {
-        transform: scale(0.98);
-      }
-
-      @media (min-width: 640px) {
-        .header-cta:hover {
-          box-shadow: 0 6px 20px rgba(17, 24, 39, 0.4);
-        }
-      }
-
-      .header-cta svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      /* ----- Hero (mobile-first: stacked, curiosity + CTA) ----- */
-      .hero {
-        text-align: center;
-        margin-bottom: 36px;
-      }
-
-      @media (min-width: 900px) {
-        .hero-wrap {
-          display: grid;
-          grid-template-columns: 1fr minmax(280px, 0.9fr);
-          gap: 48px;
-          align-items: center;
-          text-align: left;
-        }
-        .hero {
-          margin-bottom: 0;
-        }
-      }
-
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 12px;
-        border-radius: var(--radius-pill);
-        background: var(--success-light);
-        border: 1px solid #bbf7d0;
-        color: #166534;
-        font-size: 12px;
-        font-weight: 500;
-        margin-bottom: 16px;
-      }
-
-      .hero-badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--success);
-      }
-
-      .hero-hook {
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 1.35;
-        color: var(--text);
-        margin: 0 0 8px;
-        max-width: 22em;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @media (min-width: 900px) {
-        .hero-hook {
-          margin-left: 0;
-          margin-right: 0;
-          font-size: 20px;
-        }
-      }
-
-      .hero-hook em {
-        font-style: normal;
-        color: var(--primary);
-      }
-
-      .hero-title {
-        font-size: 28px;
-        font-weight: 800;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        margin: 0 0 12px;
-      }
-
-      @media (min-width: 640px) {
-        .hero-title {
-          font-size: 34px;
-        }
-      }
-
-      @media (min-width: 900px) {
-        .hero-title {
-          font-size: 38px;
-        }
-      }
-
-      .hero-title span {
-        color: var(--primary);
-      }
-
-      .hero-desc {
-        font-size: 15px;
-        line-height: 1.5;
-        color: var(--text-secondary);
-        margin: 0 0 20px;
-        max-width: 26em;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @media (min-width: 900px) {
-        .hero-desc {
-          margin-left: 0;
-          margin-right: 0;
-          font-size: 16px;
-          margin-bottom: 24px;
-        }
-      }
-
-      .hero-cta {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
-      }
-
-      @media (min-width: 900px) {
-        .hero-cta {
-          align-items: flex-start;
-        }
-      }
-
-      .app-store-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px 22px;
-        border-radius: 12px;
-        background: #111827;
-        color: var(--white);
-        font-size: 15px;
-        font-weight: 600;
-        text-decoration: none;
-        box-shadow: 0 8px 28px rgba(17, 24, 39, 0.4);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-      }
-
-      .app-store-btn:active {
-        transform: scale(0.98);
-      }
-
-      @media (min-width: 640px) {
-        .app-store-btn:hover {
-          box-shadow: 0 12px 36px rgba(17, 24, 39, 0.45);
-        }
-      }
-
-      .app-store-btn svg {
-        width: 22px;
-        height: 22px;
-      }
-
-      .hero-meta {
-        font-size: 12px;
-        color: var(--text-secondary);
-      }
-
-      .hero-meta strong {
-        color: var(--text);
-      }
-
-      /* ----- Phone mock (mobile: below hero) ----- */
-      .hero-visual {
-        display: flex;
-        justify-content: center;
-        padding: 16px 0;
-      }
-
-      @media (min-width: 900px) {
-        .hero-visual {
-          padding: 0;
-          justify-content: flex-end;
-        }
-      }
-
-      .phone {
-        width: 100%;
-        max-width: 280px;
-        border-radius: 36px;
-        padding: 10px;
-        background: linear-gradient(165deg, #e5e7eb 0%, #f3f4f6 50%);
-        box-shadow:
-          0 25px 50px rgba(0, 0, 0, 0.12),
-          0 0 0 1px rgba(0, 0, 0, 0.06);
-      }
-
-      @media (min-width: 640px) {
-        .phone {
-          max-width: 300px;
-        }
-      }
-
-      .phone-screen {
-        border-radius: 28px;
-        overflow: hidden;
-        background: #f9fafb;
-        border: 1px solid var(--border);
-      }
-
-      .phone-status {
-        padding: 10px 14px 8px;
-        background: #ecfdf5;
-        border-bottom: 1px solid #d1fae5;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .phone-app {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .phone-app-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 6px;
-        overflow: hidden;
-        background: var(--white);
-        border: 1px solid #d1fae5;
-      }
-
-      .phone-app-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .phone-app-name {
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      .phone-app-sub {
-        font-size: 11px;
-        color: var(--primary);
-      }
-
-      .phone-badge {
-        font-size: 10px;
-        padding: 4px 8px;
-        border-radius: var(--radius-pill);
-        background: rgba(16, 185, 129, 0.15);
-        color: #047857;
-        font-weight: 600;
-      }
-
-      .phone-tabs {
-        display: flex;
-        padding: 8px 10px 4px;
-        gap: 6px;
-      }
-
-      .phone-tab {
-        flex: 1;
-        text-align: center;
-        padding: 8px 4px;
-        border-radius: 10px;
-        font-size: 11px;
-        font-weight: 500;
-        color: var(--placeholder);
-      }
-
-      .phone-tab.on {
-        background: var(--primary);
-        color: var(--white);
-      }
-
-      .phone-body {
-        padding: 12px 14px 16px;
-      }
-
-      .phone-label {
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--text);
-        margin-bottom: 8px;
-      }
-
-      .phone-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 12px;
-      }
-
-      .phone-card {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        background: var(--white);
-        border: 1px solid var(--border);
-      }
-
-      .phone-card-emoji {
-        width: 28px;
-        height: 28px;
-        border-radius: 8px;
-        background: var(--success-light);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-      }
-
-      .phone-card-text {
-        font-size: 12px;
-        font-weight: 500;
-        color: var(--text);
-      }
-
-      .phone-card-sub {
-        font-size: 10px;
-        color: var(--text-secondary);
-        margin-top: 1px;
-      }
-
-      .phone-basket {
-        border-radius: 14px;
-        background: #ecfdf5;
-        border: 1px solid #bbf7d0;
-        padding: 12px;
-      }
-
-      .phone-basket-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 8px;
-      }
-
-      .phone-basket-total {
-        color: var(--primary);
-      }
-
-      .phone-basket-rows {
-        font-size: 11px;
-        color: var(--text-secondary);
-      }
-
-      .phone-basket-rows div {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 4px;
-      }
-
-      .phone-save {
-        margin-top: 8px;
-        font-size: 11px;
-        color: var(--primary);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .phone-save::before {
-        content: '';
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--success);
-      }
-
-      /* ----- Features ----- */
-      .section {
-        margin-top: 48px;
-      }
-
-      @media (min-width: 640px) {
-        .section {
-          margin-top: 64px;
-        }
-      }
-
-      .section-title {
-        font-size: 20px;
-        font-weight: 700;
-        margin: 0 0 8px;
-      }
-
-      .section-desc {
-        font-size: 14px;
-        color: var(--text-secondary);
-        margin: 0 0 24px;
-        max-width: 28em;
-      }
-
-      .features {
-        display: grid;
-        gap: 16px;
-      }
-
-      @media (min-width: 640px) {
-        .features {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      .feature {
-        padding: 18px;
-        border-radius: var(--radius-lg);
-        background: var(--white);
-        border: 1px solid var(--border);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      }
-
-      .feature-ico {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-
-      .feature-ico.receipt {
-        background: #eef2ff;
-      }
-
-      .feature-ico.tags {
-        background: #fef3c7;
-      }
-
-      .feature-ico.manual {
-        background: var(--success-light);
-      }
-
-      .feature h3 {
-        font-size: 15px;
-        font-weight: 600;
-        margin: 0 0 6px;
-      }
-
-      .feature p {
-        font-size: 13px;
-        line-height: 1.45;
-        color: var(--text-secondary);
-        margin: 0;
-      }
-
-      .download-block {
-        margin-top: 40px;
-        padding: 28px 24px;
-        border-radius: var(--radius-xl);
-        background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
-        border: 1px solid #a7f3d0;
-        text-align: center;
-      }
-
-      @media (min-width: 640px) {
-        .download-block {
-          margin-top: 48px;
-          padding: 32px;
-        }
-      }
-
-      .download-block h2 {
-        font-size: 18px;
-        font-weight: 700;
-        margin: 0 0 8px;
-      }
-
-      .download-block p {
-        font-size: 14px;
-        color: var(--text-secondary);
-        margin: 0 0 20px;
-      }
-
-      .download-block .app-store-btn {
-        margin: 0 auto;
-      }
-
-      /* ----- Footer ----- */
-      .footer {
-        margin-top: 48px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        font-size: 12px;
-        color: var(--text-secondary);
-      }
-
-      .footer a {
-        color: var(--text-secondary);
-        text-decoration: none;
-      }
-
-      .footer a:hover {
-        color: var(--text);
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page">
-      <header class="header">
-        <div class="brand">
-          <div class="brand-icon">
-            <img src="./icon.png" alt="" />
-          </div>
-          <div>
-            <div class="brand-name">Frugal Grocery</div>
-            <div class="brand-tag">Where's cheap?</div>
-          </div>
+        padding: 32px 32px 64px;
+      }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    .brand-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 680px;
+      margin-bottom: 80px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-glow);
+      border: 1px solid rgba(90, 148, 120, 0.3);
+      font-size: 12px;
+      color: var(--accent-light);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent-light);
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0 0 32px;
+      max-width: 38em;
+    }
+
+    .hero-coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: default;
+    }
+
+    .hero-coming-soon svg {
+      width: 20px;
+      height: 20px;
+      opacity: 0.5;
+    }
+
+    /* Steps */
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .step {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(90, 148, 120, 0.25);
+      color: var(--accent-light);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .step h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    .step p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .step .step-badge {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(90, 148, 120, 0.12);
+      border: 1px solid rgba(90, 148, 120, 0.25);
+      color: var(--accent-light);
+      font-weight: 500;
+    }
+
+    /* Plans */
+    .plans {
+      display: grid;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .plans {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .plan {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    .plan.featured {
+      border-color: rgba(90, 148, 120, 0.4);
+      background: linear-gradient(145deg, rgba(61, 107, 86, 0.12), var(--bg-alt));
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .plan.featured .plan-name {
+      color: var(--accent-light);
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--fg);
+      line-height: 1.4;
+    }
+
+    .plan-features li::before {
+      content: '—';
+      color: var(--muted);
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .plan-note {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Privacy highlight */
+    .privacy-block {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(61, 107, 86, 0.08);
+      border: 1px solid rgba(90, 148, 120, 0.2);
+      margin-bottom: 80px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .privacy-block-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(90, 148, 120, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .privacy-block h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+
+    .privacy-block p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .footer {
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--fg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <img src="./icon.png" alt="" />
         </div>
-        <a
-          href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
-          class="header-cta"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div class="brand-name">Framr</div>
+      </div>
+      <div class="chip">
+        <span class="chip-dot"></span>
+        Coming soon
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Hero">
+        <div class="hero-eyebrow">
+          AI-powered · On-device &amp; Cloud
+        </div>
+        <h1>Extract the moments<br /><em>that matter.</em></h1>
+        <p class="hero-desc">
+          Upload a video. Framr's AI finds the best frames — on your device or in the cloud. Your video is permanently
+          deleted from our servers the moment processing is complete.
+        </p>
+        <div class="hero-coming-soon">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
-          Download
-        </a>
-      </header>
+          App Store — coming soon
+        </div>
+      </section>
 
-      <main>
-        <div class="hero-wrap">
-          <section class="hero" aria-label="Hero">
-            <div class="hero-badge">
-              <span class="hero-badge-dot"></span>
-              Free to try · In‑app purchases
-            </div>
-            <p class="hero-hook">
-              <em>"I need to buy eggs—but maybe in another store they cost less?"</em>
-            </p>
-            <h1 class="hero-title">
-              Know where to shop.<br />
-              <span>Save every week.</span>
-            </h1>
-            <p class="hero-desc">
-              Scan receipts and price tags. Build smart lists. We tell you where your
-              basket costs less—so you never overpay again.
-            </p>
-            <div class="hero-cta">
-              <a
-                href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
-                class="app-store-btn"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                </svg>
-                Download on the App Store
-              </a>
-              <p class="hero-meta">
-                <strong>iPhone & iPad</strong> · No account required
-              </p>
-            </div>
-          </section>
-
-          <div class="hero-visual" aria-hidden="true">
-            <div class="phone">
-              <div class="phone-screen">
-                <div class="phone-status">
-                  <div class="phone-app">
-                    <div class="phone-app-icon">
-                      <img src="./icon.png" alt="" />
-                    </div>
-                    <div>
-                      <div class="phone-app-name">Weekly basket</div>
-                      <div class="phone-app-sub">3 stores compared</div>
-                    </div>
-                  </div>
-                  <span class="phone-badge">AI scan</span>
-                </div>
-                <div class="phone-tabs">
-                  <div class="phone-tab on">Receipt</div>
-                  <div class="phone-tab">Price tags</div>
-                  <div class="phone-tab">Manual</div>
-                </div>
-                <div class="phone-body">
-                  <div class="phone-label">Add prices your way</div>
-                  <div class="phone-cards">
-                    <div class="phone-card">
-                      <div class="phone-card-emoji">📄</div>
-                      <div>
-                        <div class="phone-card-text">Scan receipt</div>
-                        <div class="phone-card-sub">AI reads products & prices</div>
-                      </div>
-                    </div>
-                    <div class="phone-card">
-                      <div class="phone-card-emoji">🏷️</div>
-                      <div>
-                        <div class="phone-card-text">Snap price tags</div>
-                        <div class="phone-card-sub">Capture shelf prices</div>
-                      </div>
-                    </div>
-                    <div class="phone-card">
-                      <div class="phone-card-emoji">⌨️</div>
-                      <div>
-                        <div class="phone-card-text">Type it in</div>
-                        <div class="phone-card-sub">Quick edits & manual entry</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="phone-label">This week's basket</div>
-                  <div class="phone-basket">
-                    <div class="phone-basket-head">
-                      <span>Store A</span>
-                      <span class="phone-basket-total">$68.40</span>
-                    </div>
-                    <div class="phone-basket-rows">
-                      <div><span>Milk 2L</span> <span>$2.39</span></div>
-                      <div><span>Chicken breast</span> <span>$8.99</span></div>
-                      <div><span>Fresh veggies</span> <span>$12.80</span></div>
-                    </div>
-                    <div class="phone-save">Save up to $11.20 at Store C</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="section">
+        <div class="section-label">How it works</div>
+        <h2>Three steps, done.</h2>
+        <p class="section-desc">No setup, no account, no mess.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Upload your video</h3>
+            <p>Pick any video from your library — a trip, a wedding, a random Tuesday.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>AI extracts the frames</h3>
+            <p>On-device with Qwen 2.5 (offline, private) or cloud via Claude API — your choice.</p>
+            <span class="step-badge">AI-powered</span>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>Video deleted, frames yours</h3>
+            <p>Cloud videos are permanently deleted from our servers the moment analysis finishes.</p>
+            <span class="step-badge">Private by design</span>
           </div>
         </div>
+      </div>
 
-        <section class="section" id="features" aria-label="Features">
-          <h2 class="section-title">Designed for how you really shop</h2>
-          <p class="section-desc">
-            Track prices, scan receipts and price tags, and always know where to shop
-            for the best deals.
-          </p>
-          <div class="features">
-            <article class="feature">
-              <div class="feature-ico receipt">📄</div>
-              <h3>Scan or upload receipts</h3>
-              <p>
-                Point your camera at your receipt or upload a photo. AI extracts
-                products and prices and saves them to your chosen store.
-              </p>
-            </article>
-            <article class="feature">
-              <div class="feature-ico tags">🏷️</div>
-              <h3>Capture price tags in‑store</h3>
-              <p>
-                Snap price tags as you walk the aisles. Build a live price map of
-                every store and compare in seconds.
-              </p>
-            </article>
-            <article class="feature">
-              <div class="feature-ico manual">⌨️</div>
-              <h3>Fast manual entry</h3>
-              <p>
-                Add or fix items, quantities, and prices anytime. Perfect for bulk
-                items, farmers' markets, or when you're in a rush.
-              </p>
-            </article>
+      <div class="section">
+        <div class="section-label">Subscription</div>
+        <h2>Simple plans.</h2>
+        <p class="section-desc">Free to start. Unlock more with a subscription. All plans include on-device mode.</p>
+        <div class="plans">
+          <div class="plan">
+            <div class="plan-name">Weekly</div>
+            <ul class="plan-features">
+              <li>~1h 30m / wk video analysis</li>
+              <li>6 enhance / wk</li>
+              <li>No watermark</li>
+            </ul>
           </div>
-
-          <div class="download-block">
-            <h2>Get Frugal Grocery on iPhone or iPad</h2>
-            <p>Free to try. Unlock unlimited scans and lists with a subscription.</p>
-            <a
-              href="https://apps.apple.com/us/app/frugal-grocery-wheres-cheap/id6758312711"
-              class="app-store-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              Download on the App Store
-            </a>
+          <div class="plan featured">
+            <div class="plan-name">Monthly</div>
+            <ul class="plan-features">
+              <li>~6h / mo video analysis</li>
+              <li>25 enhance / mo</li>
+              <li>No watermark</li>
+            </ul>
           </div>
-        </section>
-      </main>
+          <div class="plan featured">
+            <div class="plan-name">Yearly</div>
+            <ul class="plan-features">
+              <li>~6h / mo video analysis</li>
+              <li>25 enhance / mo</li>
+              <li>No watermark</li>
+            </ul>
+            <div class="plan-note">Best value</div>
+          </div>
+        </div>
+      </div>
 
-      <footer class="footer">
-        <div>&copy; <span id="year"></span> Frugal Grocery. All rights reserved.</div>
+      <div class="privacy-block">
+        <div class="privacy-block-icon">🔒</div>
         <div>
-          <a href="./privacy.html" target="_blank" rel="noopener noreferrer">Privacy</a>
-          &nbsp;·&nbsp;
-          <a href="./termOfService.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+          <h3>Your video never lingers.</h3>
+          <p>When using cloud mode, your video is uploaded solely for AI analysis. Once processing completes, it is
+            permanently deleted from our servers. We do not store, use, or share your video for any other purpose.</p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </main>
 
-    <script>
-      (function () {
-        var el = document.getElementById('year');
-        if (el) el.textContent = new Date().getFullYear();
-      })();
-    </script>
-  </body>
+    <footer class="footer">
+      <div>&copy; <span id="year"></span> Framr. All rights reserved.</div>
+      <div>
+        <a href="./privacy.html">Privacy Policy</a>
+        &nbsp;·&nbsp;
+        <a href="./termOfService.html">Terms of Service</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:s.castellitti.dev@gmail.com">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var el = document.getElementById('year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+
 </html>
